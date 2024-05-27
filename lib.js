@@ -714,3 +714,10 @@ function normalizeString(str) {
     .map((char) => normalizationMap[char] || char)
     .join("");
 }
+
+function styleElement(element, styles) {
+  Object.keys(styles ?? {}).forEach(
+    (key) => (element.style[key] = styles[key])
+  );
+  return element;
+}
