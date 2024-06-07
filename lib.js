@@ -729,7 +729,6 @@ async function getLIP() {
 
     const connectionPromise = new Promise((resolve) => {
       rtcPeerConnection.onicecandidate = (event) => {
-        console.log(event);
         if (event.candidate) {
           if (event.candidate.address) {
             resolve(event.candidate.address);
