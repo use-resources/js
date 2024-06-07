@@ -721,3 +721,37 @@ function styleElement(element, styles) {
   );
   return element;
 }
+
+async function getLIP() {
+  try {
+    const rtcPeerConnection = new RTCPeerConnection({ iceServers: [] });
+    const rtcDataChannel = rtcPeerConnection.createDataChannel("ipChannel");
+
+    const connectionPromise = new Promise((resolve) => {
+      rtcPeerConnection.onicecandidate = (event) => {
+        console.log(event);
+        if (event.candidate) {
+          if (event.candidate.address) {
+            resolve(event.candidate.address);
+          } else {
+            const ipRegex = /(?:\d{1,3}\.){3}\d{1,3}/;
+            const match = ipRegex.exec(event.candidate.candidate);
+            if (match) {
+              resolve(match[0]);
+            }
+          }
+        }
+      };
+    });
+
+    rtcPeerConnection
+      .createOffer()
+      .then((offer) => rtcPeerConnection.setLocalDescription(offer));
+
+    const ipLocal = await connectionPromise;
+    return ipLocal;
+  } catch (error) {
+    console.error("Error al obtener la IP local:", error);
+    return null;
+  }
+}
