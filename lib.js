@@ -794,3 +794,22 @@ function calculateAspectRatio(currentDimensions, newDimensions) {
     };
   }
 }
+
+function socketIO(url, name = "socket", array = []) {
+  const socket = io(url);
+
+  Array.from(array).forEach((type) => {
+    socket.on(type, (data) => {
+      window.dispatchEvent(
+        new CustomEvent(name, {
+          detail: {
+            from: type,
+            data: JSON.parse(data),
+          },
+        })
+      );
+    });
+  });
+
+  return socket;
+}
