@@ -764,3 +764,33 @@ function downloadFile(url, name = "") {
   a.click();
   document.body.removeChild(a);
 }
+
+function calculateAspectRatio(currentDimensions, newDimensions) {
+  const { currentWidth, currentHeight } = currentDimensions;
+  const { width: newWidth, height: newHeight } = newDimensions;
+
+  if (newWidth && newHeight) {
+    const scaleFactor = newWidth / currentWidth;
+    return {
+      width: newWidth,
+      height: currentHeight * scaleFactor,
+    };
+  } else if (newWidth) {
+    const scaleFactor = newWidth / currentWidth;
+    return {
+      width: newWidth,
+      height: currentHeight * scaleFactor,
+    };
+  } else if (newHeight) {
+    const scaleFactor = newHeight / currentHeight;
+    return {
+      width: currentWidth * scaleFactor,
+      height: newHeight,
+    };
+  } else {
+    return {
+      width: currentWidth,
+      height: currentHeight,
+    };
+  }
+}
