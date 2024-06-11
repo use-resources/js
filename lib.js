@@ -813,3 +813,9 @@ function socketIO(url, name = "socket", array = []) {
 
   return socket;
 }
+
+function encodeQueryObject(query) {
+  return Object.keys(query)
+    .map((key) => `${key}=${encodeURIComponent(query[key])}`)
+    .join("&");
+}
