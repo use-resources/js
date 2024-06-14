@@ -795,11 +795,12 @@ function calculateAspectRatio(currentDimensions, newDimensions) {
   }
 }
 
-function socketIO(url, name = "socket", array = []) {
+function socketIO(url, name = "socketIO", array = []) {
   const socket = io(url);
 
   Array.from(array).forEach((type) => {
     socket.on(type, (data) => {
+      console.log(data)
       window.dispatchEvent(
         new CustomEvent(name, {
           detail: {
