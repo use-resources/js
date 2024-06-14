@@ -800,12 +800,16 @@ function socketIO(url, name = "socketIO", array = []) {
 
   Array.from(array).forEach((type) => {
     socket.on(type, (data) => {
-      console.log(data)
+      try {
+          data = JSON.parse( data )
+      } catch (error) {
+          console.log(error);  
+      }
       window.dispatchEvent(
         new CustomEvent(name, {
           detail: {
             from: type,
-            data: JSON.parse(data),
+            data: data,
           },
         })
       );
