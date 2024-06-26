@@ -12,325 +12,353 @@ class MediaPlayer {
     const style = document.createElement("style");
 
     style.innerHTML = `
-            .div_odDylxaL9C44Cxz {
-            position: inherit;
-            inset: inherit;
-            }
+      .div_odDylxaL9C44Cxz {
+        position: inherit;
+        inset: inherit;
+      }
 
-            .div_vze7xVdMQzHAUh {
-            position: relative;
-            background: #000000;
+      .div_S2OWmrFPAHLAweO {
+        position: absolute;
+        inset: 0;
 
-            width: 100%;
-            height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-            color: #ffffff;
+        pointer-events: none;
+      }
 
-            & * {
-                margin: 0;
-                padding: 0;
-                font-family: sans-serif;
-            }
+      .span_0bmNRSqfOU1xjpo {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #ffffff;
+      }
 
-            & button {
-                background: none;
-                outline: none;
-                border: none;
-            }
+      .div_vze7xVdMQzHAUh {
+        position: relative;
+        background: #000000;
+
+        width: 100%;
+        height: 100%;
+
+        color: #ffffff;
+
+        & * {
+          margin: 0;
+          padding: 0;
+          font-family: sans-serif;
+        }
+
+        & button {
+          background: none;
+          outline: none;
+          border: none;
+        }
+
+        & svg {
+          width: 15px;
+          height: 15px;
+          fill: #ffffff;
+        }
+      }
+
+      .div_9sbPnGYDZ0MHJDx {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        & canvas {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: blur(150px);
+        }
+
+        & video {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .div_BzD7xoPAKTVhJ2J {
+        position: absolute;
+        inset: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .div_30iEfg1Tp8Z9Sfe {
+        width: 100%;
+        height: 60px;
+
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        background: rgb(0 0 0 / 0.3);
+      }
+
+      .div_fqntqCwolU7nS2I {
+        flex: 1;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        overflow: hidden;
+
+        /*gap: 15px;*/
+
+        & button {
+          background: rgb(0 0 0 / 0.3);
+          width: 60px;
+          height: 60px;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          border-radius: 50%;
+          position: relative;
+
+          &.medium {
+            width: 80px;
+            height: 80px;
 
             & svg {
-                width: 15px;
-                height: 15px;
-                fill: #ffffff;
+              width: 25px;
+              height: 25px;
             }
-            }
+          }
+        }
 
-            .div_9sbPnGYDZ0MHJDx {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+        & svg {
+          fill: #ffffff;
+          width: 20px;
+          height: 20px;
+        }
+      }
 
-            & canvas {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                filter: blur(150px);
-            }
+      .div_KYTTm4XcCkVvAmy {
+        display: flex;
+        padding: 10px;
+        gap: 10px;
+        flex: 1;
 
-            & video {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
-            }
+        overflow: hidden;
+      }
 
-            .div_BzD7xoPAKTVhJ2J {
-            position: absolute;
-            inset: 0;
+      .div_swkEBnnVsXvSjjL {
+        flex: 1;
+        margin: auto;
+        overflow: hidden;
+        display: grid;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            }
+        color: #ffffff;
 
-            .div_30iEfg1Tp8Z9Sfe {
-            width: 100%;
-            height: 60px;
+        & p {
+          font-size: 15px;
+          font-weight: bold;
+        }
 
-            display: flex;
-            overflow: hidden;
-            position: relative;
-            background: rgb(0 0 0 / 0.3);
-            }
+        & span {
+          font-size: 13px;
+        }
+      }
 
-            .div_fqntqCwolU7nS2I {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+      .div_quGYBx1MHxIWCd6 {
+        position: relative;
+        flex: 1;
+        display: grid;
+        margin: auto;
+        padding-left: 20px;
+        gap: 3px;
 
-            gap: 15px;
+        & span {
+          font-size: 14px;
+        }
+      }
+      .button_wBp8eB3YdFZoLqE {
+        margin: 10px;
+        width: 40px;
+        height: 40px;
 
-            & button {
-                background: rgb(0 0 0 / 0.3);
-                width: 60px;
-                height: 60px;
+        position: relative;
+      }
 
-                display: flex;
-                justify-content: center;
-                align-items: center;
+      .div_iVl4urAy8xQ7zk6 {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-                border-radius: 50%;
-                position: relative;
-            }
+        background: rgb(255 255 255 / 0.3);
+        height: 3px;
+        border-radius: 3px;
+        flex: 1;
 
-            & svg {
-                fill: #ffffff;
-                width: 20px;
-                height: 20px;
-            }
-            }
+        & input {
+          position: relative;
+          width: 100%;
+          opacity: 0;
+        }
 
-            .div_KYTTm4XcCkVvAmy {
-            display: flex;
-            padding: 10px;
-            gap: 10px;
-            flex: 1;
+        & hr {
+          position: absolute;
+          left: 0;
+          background: #ffffff;
+          width: 0;
+          height: 100%;
+          border: none;
+          border-radius: inherit;
+        }
+      }
 
-            overflow: hidden;
-            }
+      .div_tmIkQJSqwdupw {
+        position: absolute;
+        inset: 0;
 
-            .div_swkEBnnVsXvSjjL {
-            flex: 1;
-            margin: auto;
-            overflow: hidden;
-            display: grid;
+        display: flex;
+      }
 
-            color: #ffffff;
+      .div_0wgv7xmg98Vw2IY {
+        background: rgb(0 0 0 / 0.3);
+        margin-left: auto;
+        position: relative;
+        width: 60px;
+        height: 100%;
 
-            & p {
-                font-size: 15px;
-                font-weight: bold;
-            }
+        overflow-y: auto;
+        scrollbar-width: none;
+      }
 
-            & span {
-                font-size: 13px;
-            }
-            }
+      .div_5lgw0Me5IocTECr {
+        margin-bottom: auto;
+        display: grid;
+        padding: 10px;
+        gap: 10px;
 
-            .div_quGYBx1MHxIWCd6 {
-            position: relative;
-            flex: 1;
-            display: grid;
-            margin: auto;
-            padding-left: 20px;
-            gap: 3px;
+        & button {
+          width: 40px;
+          height: 40px;
 
-            & span {
-                font-size: 14px;
-            }
-            }
-            .button_wBp8eB3YdFZoLqE {
-            margin: 10px;
-            width: 40px;
-            height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
 
-            position: relative;
-            }
+      .div_pcg6NWag8XKbP8e {
+        position: absolute;
+        inset: 0;
 
-            .div_iVl4urAy8xQ7zk6 {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        display: flex;
+      }
 
+      .div_q9MnoHmDRvz1I5g {
+        position: relative;
+        margin: auto;
+        width: min(100%, 450px);
+
+        background: rgb(0 0 0 / 0.3);
+        padding: 20px;
+        gap: 20px;
+
+        display: grid;
+      }
+
+      .div_ccWrXBhzP0hqhl5 {
+        display: grid;
+        grid-template-columns: 1fr 40px;
+        align-items: center;
+        gap: 20px;
+
+        text-align: center;
+      }
+
+      .div_KoXCFVHsmvOVAj1 {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        align-items: center;
+        padding-right: 10px;
+
+        overflow: hidden;
+
+        & button {
+          width: 40px;
+          height: 40px;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        & span {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .label_Vgul2cCgNhl4gPP {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 40px;
+        height: 40px;
+      }
+
+      .div_tAIppFChF7u7CjX {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        & button {
+          border-radius: 30px;
+          padding: 10px 20px;
+          color: #ffffff;
+
+          &.focus {
             background: rgb(255 255 255 / 0.3);
-            height: 3px;
-            border-radius: 3px;
-            flex: 1;
+          }
+        }
+      }
 
-            & input {
-                position: relative;
-                width: 100%;
-                opacity: 0;
-            }
+      .div_CQM4abRCwN455Mw {
+        --pixel: 45px;
+        --color: #000000;
+        margin: auto;
 
-            & hr {
-                position: absolute;
-                left: 0;
-                background: #ffffff;
-                width: 0;
-                height: 100%;
-                border: none;
-                border-radius: inherit;
-            }
-            }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-            .div_tmIkQJSqwdupw {
-            position: absolute;
-            inset: 0;
- 
-            display: flex;
-            }
+      .div_CQM4abRCwN455Mw::before {
+        content: "";
+        width: var(--pixel);
+        height: var(--pixel);
+        border-radius: 50%;
+        display: inline-block;
+        border-top: 3px solid var(--color);
+        border-right: 3px solid transparent;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
 
-            .div_0wgv7xmg98Vw2IY {
-            background: rgb(0 0 0 / 0.3);
-            margin-left: auto;
-            position: relative;
-            width: 60px;
-            height: 100%;
-
-            overflow-y: auto;
-            scrollbar-width: none;
-            }
-
-            .div_5lgw0Me5IocTECr {
-            margin-bottom: auto;
-            display: grid;
-            padding: 10px;
-            gap: 10px;
-
-            & button {
-                width: 40px;
-                height: 40px;
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            }
-
-            .div_pcg6NWag8XKbP8e {
-            position: absolute;
-            inset: 0;
-
-            display: flex;
-            }
-
-            .div_q9MnoHmDRvz1I5g {
-            position: relative;
-            margin: auto;
-            width: min(100%, 450px);
-
-            background: rgb(0 0 0 / 0.3);
-            padding: 20px;
-            gap: 20px;
-
-            display: grid;
-            }
-
-            .div_ccWrXBhzP0hqhl5 {
-            display: grid;
-            grid-template-columns: 1fr 40px;
-            align-items: center;
-            gap: 20px;
-
-            text-align: center;
-            }
-
-            .div_KoXCFVHsmvOVAj1 {
-            display: grid;
-            grid-template-columns: 40px 1fr;
-            align-items: center;
-            padding-right: 10px;
-
-            overflow: hidden;
-
-            & button {
-                width: 40px;
-                height: 40px;
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            & span {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-            }
-
-            .label_Vgul2cCgNhl4gPP {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            width: 40px;
-            height: 40px;
-            }
-
-            .div_tAIppFChF7u7CjX {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-
-            & button {
-                border-radius: 30px;
-                padding: 10px 20px;
-                color: #ffffff;
-
-                &.focus {
-                background: rgb(255 255 255 / 0.3);
-                }
-            }
-            }
-
-            .div_CQM4abRCwN455Mw {
-            --pixel: 45px;
-            --color: #000000;
-            margin: auto;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            }
-
-            .div_CQM4abRCwN455Mw::before {
-            content: "";
-            width: var(--pixel);
-            height: var(--pixel);
-            border-radius: 50%;
-            display: inline-block;
-            border-top: 3px solid var(--color);
-            border-right: 3px solid transparent;
-            box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-            }
-
-            @keyframes rotation {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-            }
-        `;
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    `;
 
     document.head.append(style);
   }
@@ -367,107 +395,108 @@ class MediaPlayer {
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512"><path d="M11,13V7c0-.55,.45-1,1-1s1,.45,1,1v6c0,.55-.45,1-1,1s-1-.45-1-1Zm1,2c-.83,0-1.5,.67-1.5,1.5s.67,1.5,1.5,1.5,1.5-.67,1.5-1.5-.67-1.5-1.5-1.5Zm11.58,4.88c-.7,1.35-2.17,2.12-4.01,2.12H4.44c-1.85,0-3.31-.77-4.01-2.12-.71-1.36-.51-3.1,.5-4.56L8.97,2.6c.71-1.02,1.83-1.6,3.03-1.6s2.32,.58,3,1.57l8.08,12.77c1.01,1.46,1.2,3.19,.49,4.54Zm-2.15-3.42s-.02-.02-.02-.04L13.34,3.67c-.29-.41-.79-.67-1.34-.67s-1.05,.26-1.36,.71L2.59,16.42c-.62,.88-.76,1.84-.4,2.53,.35,.68,1.15,1.05,2.24,1.05h15.12c1.09,0,1.89-.37,2.24-1.05,.36-.69,.22-1.65-.37-2.49Z"/></svg>',
     };
     this.__template.innerHTML = `
-            <div class="div_vze7xVdMQzHAUh">
-
-                <div class="div_9sbPnGYDZ0MHJDx">
-                    <canvas id="canvas"></canvas>
-                    <video id="video" src=""></video>
-                </div>
-
-                <div id="control" class="div_BzD7xoPAKTVhJ2J">
-                    <div id="hideControl" class="div_odDylxaL9C44Cxz" data-status="true"></div>
-                    <div class="div_30iEfg1Tp8Z9Sfe" data-control="">
-                        <div class="div_KYTTm4XcCkVvAmy">
-                            <div class="div_swkEBnnVsXvSjjL">
-                                <p id="videoTitle" class="text-ellipsis"></p>
-                                <span id="videoDescription" class="text-ellipsis"></span>
-                            </div>
-                        </div>
-                        <button id="openOptions" class="button_wBp8eB3YdFZoLqE">${this.__icon.options}</button>
-                    </div>
-                    <div class="div_fqntqCwolU7nS2I" data-control="">
-                        <button id="seekLeft">${this.__icon.seekLeft}</button>
-                        <button id="play" style="width: 80px; height: 80px;" data-status="false">
-                            <div class="div_CQM4abRCwN455Mw" style="--color:#ffffff; --pixel:60px"></div>
-                        </button>
-                        <button id="seekRight">${this.__icon.seekRight}</button>
-                    </div>
-                    <div class="div_30iEfg1Tp8Z9Sfe" data-control="">
-                        <div id="duration" class="div_quGYBx1MHxIWCd6">
-                            <span id="durationText">99:99</span>
-                            <div class="div_iVl4urAy8xQ7zk6">
-                                <hr id="durationBar">
-                                <input id="durationInput" type="range" data-status="false" min="0" value="0" max="0">
-                            </div>
-                        </div>
-                        <button id="buttonFullscreen" class="button_wBp8eB3YdFZoLqE">${this.__icon.screenMax}</button>
-                    </div>
-                </div>
-                <div id="options" class="div_tmIkQJSqwdupw" style="display: none;">
-                    <div id="closeOptions" class="div_odDylxaL9C44Cxz"></div>
-                    <div class="div_0wgv7xmg98Vw2IY">
-                        <div id="optionsButtons" class="div_5lgw0Me5IocTECr">
-                            <button id="lock" data-option-action="lock">${this.__icon.lock}</button>
-                            <button id="chromecast" data-option-action="chromecast">${this.__icon.chromecast}</button>
-                            <button id="playback_speed" data-option-action="playback_speed">${this.__icon.playbackSpeed}</button>
-                            <button id="pip" data-option-action="pip">${this.__icon.pip}</button>
-                            <button id="background_ambient" data-option-action="background_ambient">${this.__icon.background}</button>
-                            <button id="resize" data-option-action="resize" data-object-fit="contain">${this.__icon.resize}</button>
-                            <button id="download" data-option-action="download">${this.__icon.download}</button>
-                        </div>
-                    </div>
-                </div>
-                <div id="speed" class="div_pcg6NWag8XKbP8e" style="display: none;">
-                    <div id="closeSpeed" class="div_odDylxaL9C44Cxz"></div>
-                    <div class="div_q9MnoHmDRvz1I5g">
-                        <div class="div_KoXCFVHsmvOVAj1">
-                            <button>${this.__icon.back}</button>
-                            <span>Velocidad de reproduccion</span>
-                        </div>
-                        <div class="div_ccWrXBhzP0hqhl5">
-                            <div class="div_iVl4urAy8xQ7zk6">
-                                <hr id="speedBar">
-                                <input id="speedInput" type="range" data-status="false" min="0" value="10" max="100">
-                            </div>
-                            <span id="speedText">1x</span>
-                        </div>
-                        <div id="speedButtons" class="div_tAIppFChF7u7CjX">
-                            <button data-speed="5">0.5x</button>
-                            <button data-speed="10" class="focus">1x</button>
-                            <button data-speed="15">1.5x</button>
-                            <button data-speed="20">2x</button>
-                        </div>
-                    </div>
-
-                </div>
-                <div id="background" class="div_pcg6NWag8XKbP8e" style="display: none;">
-                    <div id="closeBackground" class="div_odDylxaL9C44Cxz"></div>
-                    <div class="div_q9MnoHmDRvz1I5g">
-                        <div class="div_KoXCFVHsmvOVAj1" style="grid-template-columns: 40px 1fr 40px; padding: 0;">
-                            <button>${this.__icon.back}</button>
-                            <span>Fondo de reproduccion</span>
-                            <label class="label_Vgul2cCgNhl4gPP"><input type="checkbox" id="toggleBackground"
-                                    checked></label>
-                        </div>
-                        <div class="div_ccWrXBhzP0hqhl5">
-                            <div class="div_iVl4urAy8xQ7zk6">
-                                <hr id="backgroundBar">
-                                <input id="backgroundInput" type="range" data-status="false" min="0" value="150"
-                                    max="200">
-                            </div>
-                            <span id="backgroundText">150</span>
-                        </div>
-                        <div id="backgroundButtons" class="div_tAIppFChF7u7CjX">
-                            <button data-background="50">50</button>
-                            <button data-background="100">100</button>
-                            <button data-background="150" class="focus">150</button>
-                            <button data-background="200">200</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        `;
+              <div class="div_vze7xVdMQzHAUh">
+  
+                  <div class="div_9sbPnGYDZ0MHJDx">
+                      <canvas id="canvas"></canvas>
+                      <video id="video" src=""></video>
+                  </div>
+  
+                  <div id="control" class="div_BzD7xoPAKTVhJ2J">
+                      <div id="loader" class="div_S2OWmrFPAHLAweO"><div class="div_CQM4abRCwN455Mw" style="--color:#ffffff; --pixel:80px"></div></div>
+                      <div id="hideControl" class="div_odDylxaL9C44Cxz" data-status="true"></div>
+                      <div class="div_30iEfg1Tp8Z9Sfe" data-control="">
+                          <div class="div_KYTTm4XcCkVvAmy">
+                              <div class="div_swkEBnnVsXvSjjL">
+                                  <p id="videoTitle" class="text-ellipsis"></p>
+                                  <span id="videoDescription" class="text-ellipsis"></span>
+                              </div>
+                          </div>
+                          <button id="openOptions" class="button_wBp8eB3YdFZoLqE">${this.__icon.options}</button>
+                      </div>
+                      <div class="div_fqntqCwolU7nS2I" data-control="">
+                          <button id="seekLeft">${this.__icon.seekLeft}</button>
+                          <button id="play" class="medium" data-status="false">
+                              <span class="span_0bmNRSqfOU1xjpo"></span>
+                          </button>
+                          <button id="seekRight">${this.__icon.seekRight}</button>
+                      </div>
+                      <div class="div_30iEfg1Tp8Z9Sfe" data-control="">
+                          <div id="duration" class="div_quGYBx1MHxIWCd6">
+                              <span id="durationText">99:99</span>
+                              <div class="div_iVl4urAy8xQ7zk6">
+                                  <hr id="durationBar">
+                                  <input id="durationInput" type="range" data-status="false" min="0" value="0" max="0">
+                              </div>
+                          </div>
+                          <button id="buttonFullscreen" class="button_wBp8eB3YdFZoLqE">${this.__icon.screenMax}</button>
+                      </div>
+                  </div>
+                  <div id="options" class="div_tmIkQJSqwdupw" style="display: none;">
+                      <div id="closeOptions" class="div_odDylxaL9C44Cxz"></div>
+                      <div class="div_0wgv7xmg98Vw2IY">
+                          <div id="optionsButtons" class="div_5lgw0Me5IocTECr">
+                              <button id="lock" data-option-action="lock">${this.__icon.lock}</button>
+                              <button id="chromecast" data-option-action="chromecast">${this.__icon.chromecast}</button>
+                              <button id="background_ambient" data-option-action="background_ambient">${this.__icon.background}</button>
+                              <button id="playback_speed" data-option-action="playback_speed">${this.__icon.playbackSpeed}</button>
+                              <button id="pip" data-option-action="pip">${this.__icon.pip}</button>
+                              <button id="resize" data-option-action="resize" data-object-fit="contain">${this.__icon.resize}</button>
+                              <button id="download" data-option-action="download">${this.__icon.download}</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div id="speed" class="div_pcg6NWag8XKbP8e" style="display: none;">
+                      <div id="closeSpeed" class="div_odDylxaL9C44Cxz"></div>
+                      <div class="div_q9MnoHmDRvz1I5g">
+                          <div class="div_KoXCFVHsmvOVAj1">
+                              <button>${this.__icon.back}</button>
+                              <span>Velocidad de reproduccion</span>
+                          </div>
+                          <div class="div_ccWrXBhzP0hqhl5">
+                              <div class="div_iVl4urAy8xQ7zk6">
+                                  <hr id="speedBar">
+                                  <input id="speedInput" type="range" data-status="false" min="0" value="10" max="100">
+                              </div>
+                              <span id="speedText">1x</span>
+                          </div>
+                          <div id="speedButtons" class="div_tAIppFChF7u7CjX">
+                              <button data-speed="5">0.5x</button>
+                              <button data-speed="10" class="focus">1x</button>
+                              <button data-speed="15">1.5x</button>
+                              <button data-speed="20">2x</button>
+                          </div>
+                      </div>
+  
+                  </div>
+                  <div id="background" class="div_pcg6NWag8XKbP8e" style="display: none;">
+                      <div id="closeBackground" class="div_odDylxaL9C44Cxz"></div>
+                      <div class="div_q9MnoHmDRvz1I5g">
+                          <div class="div_KoXCFVHsmvOVAj1" style="grid-template-columns: 40px 1fr 40px; padding: 0;">
+                              <button>${this.__icon.back}</button>
+                              <span>Fondo de reproduccion</span>
+                              <label class="label_Vgul2cCgNhl4gPP"><input type="checkbox" id="toggleBackground"
+                                      checked></label>
+                          </div>
+                          <div class="div_ccWrXBhzP0hqhl5">
+                              <div class="div_iVl4urAy8xQ7zk6">
+                                  <hr id="backgroundBar">
+                                  <input id="backgroundInput" type="range" data-status="false" min="0" value="150"
+                                      max="200">
+                              </div>
+                              <span id="backgroundText">150</span>
+                          </div>
+                          <div id="backgroundButtons" class="div_tAIppFChF7u7CjX">
+                              <button data-background="50">50</button>
+                              <button data-background="100">100</button>
+                              <button data-background="150" class="focus">150</button>
+                              <button data-background="200">200</button>
+                          </div>
+                      </div>
+  
+                  </div>
+              </div>
+          `;
     this.__element = this.__template.firstElementChild;
 
     this.__elements = Array.from(
@@ -569,8 +598,11 @@ class MediaPlayer {
       styleElement($elements.duration, { visibility: "" });
       styleElement($elements.seekLeft, { visibility: "" });
       styleElement($elements.seekRight, { visibility: "" });
+      styleElement($elements.loader, { display: "none" });
 
       $elements.play.setAttribute("data-status", true);
+      $elements.play.innerHTML = this.__icon.play;
+
       video.play();
     });
 
@@ -602,21 +634,23 @@ class MediaPlayer {
     });
 
     video.addEventListener("waiting", () => {
-      $elements.play.innerHTML =
-        '<div class="div_CQM4abRCwN455Mw" style="--color:#ffffff; --pixel:60px"></div>';
+      styleElement($elements.loader, { display: "" });
+      $elements.play.innerHTML = '<span class="span_0bmNRSqfOU1xjpo"></span>';
     });
 
     video.addEventListener("seeking", () => {
-      $elements.play.innerHTML =
-        '<div class="div_CQM4abRCwN455Mw" style="--color:#ffffff; --pixel:60px"></div>';
+      styleElement($elements.loader, { display: "" });
+      $elements.play.innerHTML = '<span class="span_0bmNRSqfOU1xjpo"></span>';
     });
 
     video.addEventListener("seeked", () => {
+      styleElement($elements.loader, { display: "none" });
       if (video.paused) $elements.play.innerHTML = this.__icon.play;
       else $elements.play.innerHTML = this.__icon.pause;
     });
 
     video.addEventListener("playing", () => {
+      styleElement($elements.loader, { display: "none" });
       $elements.play.innerHTML = this.__icon.pause;
     });
 
@@ -850,19 +884,24 @@ class MediaPlayer {
     });
 
     document.addEventListener("fullscreenchange", () => {
-      $elements.buttonFullscreen.innerHTML = document.fullscreenElement
-        ? this.__icon.screenMin
-        : this.__icon.screenMax;
-
-      if (document.fullscreenElement) {
-        if (window.screen.orientation && window.screen.orientation.lock) {
-          window.screen.orientation.lock("landscape");
-        }
-      } else {
-        if (window.screen.orientation && window.screen.orientation.unlock) {
-          window.screen.orientation.unlock();
+      if (document.contains(this.__element)) {
+        $elements.buttonFullscreen.innerHTML = document.fullscreenElement
+          ? this.__icon.screenMin
+          : this.__icon.screenMax;
+        if (document.fullscreenElement) {
+          if (window.screen.orientation && window.screen.orientation.lock) {
+            window.screen.orientation.lock("landscape");
+          }
+        } else {
+          if (window.screen.orientation && window.screen.orientation.unlock) {
+            window.screen.orientation.unlock();
+          }
         }
       }
+    });
+
+    document.addEventListener("leavepictureinpicture", () => {
+      if (document.fullscreenElement) document.exitFullscreen();
     });
   };
 
