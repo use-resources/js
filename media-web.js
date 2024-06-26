@@ -78,6 +78,31 @@ class MediaWeb {
     });
   };
 
+  static yourupload = (data) => {
+    return new Promise((resolve, reject) => {
+      const emit = {
+        header: {
+          from: "yourupload",
+          id: this.__generateUUID(),
+        },
+        body: {
+          url: data.url,
+        },
+      };
+
+      const __socketon = this.__socketon("setInfo", (data) => {
+        const dataJSONParse = JSON.parse(data);
+
+        if (dataJSONParse.header.id == emit.header.id) {
+          resolve(JSON.parse(data));
+          __socketon();
+        }
+      });
+
+      this.socket.emit("getInfo", JSON.stringify(emit));
+    });
+  };
+
   static youtube = (data) => {
     return new Promise((resolve, reject) => {
       const emit = {
