@@ -824,3 +824,62 @@ function encodeQueryObject(query) {
     .map((key) => `${key}=${encodeURIComponent(query[key])}`)
     .join("&");
 }
+
+class IntersectionObserverImage {
+  static intersectionObserver = null;
+  static images = [];
+
+  static {
+    this.intersectionObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const image = entry.target;
+            observer.unobserve(image);
+            this.__load(image);
+          }
+        });
+      },
+      { root: null, rootMargin: "0px", threshold: 0 }
+    );
+  }
+
+  static __load = (image) => {
+    let loop = 0;
+
+    const arEventListerner = (element, type, callback) => {
+      element.addEventListener(type, callback);
+      return () => element.removeEventListener(type, callback);
+    };
+
+    const remove = arEventListerner(image, "error", () => {
+      if (++loop > 3) return remove();
+      image.setAttribute("src", image.getAttribute("data-src"));
+    });
+
+    const add = arEventListerner(image, "load", () => {
+      add();
+      remove();
+      image.style.opacity = 1;
+    });
+
+    image.setAttribute("src", image.getAttribute("data-src"));
+  };
+
+  static load = (element, observe = true) => {
+    if (element.tagName == "IMG") {
+      element.style.opacity = 0;
+      if (observe) {
+        this.images.push(element);
+        this.intersectionObserver.observe(element);
+        return () => this.intersectionObserver.unobserve(element);
+      } else this.__load(element);
+    }
+
+    return null;
+  };
+
+  static clear = () => {
+    this.images.forEach((image) => this.intersectionObserver.unobserve(image));
+  };
+}
