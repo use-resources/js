@@ -883,3 +883,16 @@ class IntersectionObserverImage {
     this.images.forEach((image) => this.intersectionObserver.unobserve(image));
   };
 }
+
+const findElementWithRetry = async (query, limit = 100) => {
+  return new Promise((resolve, reject) => {
+    let intervalLimit = 0;
+    const interval = setInterval(() => {
+      const requestDisableCors = document.querySelector(query);
+      if (requestDisableCors || ++intervalLimit > limit) {
+        clearInterval(interval);
+        resolve(requestDisableCors);
+      }
+    });
+  });
+};
