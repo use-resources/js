@@ -551,6 +551,10 @@ class MediaPlayer {
       }
     });
 
+    document.addEventListener("leavepictureinpicture", () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+    });
+
     Array.from($element.querySelectorAll("[data-inner-svg-set]")).forEach(
       (child) =>
         (child.innerHTML = icon[child.getAttribute("data-inner-svg-set") ?? ""])
