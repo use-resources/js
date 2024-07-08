@@ -658,7 +658,16 @@ class MediaPlayer {
   };
 
   open = (data = {}) => {
-    if (URL.canParse && URL.canParse(data.url)) {
+
+function isValidURL(string) {
+    try {
+        new URL(string);
+        return true;
+    } catch (_) {
+        return false;
+    }
+}
+    if ((URL.canParse && URL.canParse(data.url)) || isValidURL(data.url)) {
       if (data.Hls) {
         const $video = this.__elements.video;
         const videoSrc = data.url;
