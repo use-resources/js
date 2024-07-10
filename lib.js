@@ -896,3 +896,12 @@ const findElementWithRetry = async (query, limit = 100) => {
     });
   });
 };
+
+function isURL( url ) {
+  try {
+      new URL( url )
+      return true 
+  } catch (error) {
+      return false
+  }
+}
