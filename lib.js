@@ -897,11 +897,15 @@ const findElementWithRetry = async (query, limit = 100) => {
   });
 };
 
-function isURL( url ) {
+function isURL(url) {
   try {
-      new URL( url )
-      return true 
+    new URL(url);
+    return true;
   } catch (error) {
-      return false
+    return false;
   }
+}
+
+function addLeadingZeros(number, totalDigits = 5) {
+  return number.toString().padStart(totalDigits, "0");
 }
