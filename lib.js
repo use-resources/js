@@ -766,7 +766,7 @@ function downloadFile(url, name = "") {
 }
 
 function calculateAspectRatio(currentDimensions, newDimensions) {
-  const { currentWidth, currentHeight } = currentDimensions;
+  const { width: currentWidth, height: currentHeight } = currentDimensions;
   const { width: newWidth, height: newHeight } = newDimensions;
 
   if (newWidth && newHeight) {
