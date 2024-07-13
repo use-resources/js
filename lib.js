@@ -803,7 +803,7 @@ function socketIO(url, name = "socketIO", array = []) {
       try {
           data = JSON.parse( data )
       } catch (error) {
-          console.log(error);  
+          //console.log(error);  
       }
       window.dispatchEvent(
         new CustomEvent(name, {
