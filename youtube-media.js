@@ -116,87 +116,7 @@ class YoutubeMedia {
         };
       });
   }
-
-  async __convert_1(parameters) {
-    const data = this._credentials;
-    const formData = new FormData();
-    formData.append("v_id", data.k_data_vid);
-    formData.append("ftype", parameters.type);
-    formData.append("fquality", parameters.quality);
-    formData.append("fname", data.k_file_name);
-    formData.append("token", data.k__id);
-    formData.append("timeExpire", data.k_time);
-
-    return await fetch(
-      `https://l8qn2l7t-80.brs.devtunnels.ms/fetch/post.php?url=${data.k_convert_url}`,
-      {
-        method: "POST",
-        headers: {
-          headers: JSON.stringify([
-            "Content-Type: application/x-www-form-urlencoded",
-            "X-Requested-Key: de0cfuirtgf67a",
-            "X-Requested-With: XMLHttpRequest",
-          ]),
-        },
-        body: formData,
-      }
-    )
-      .then((res) => res.json())
-      .then(async (res) => {
-        if (res.c_status == "ok" && res.d_url) {
-          return { status: true, url: res.d_url };
-        } else if (res.c_status == "ok" && res.c_server) {
-          return await this.__convert_2(formData, res.c_server);
-        }
-      });
-  }
-
-  async __convert_2(formData, url) {
-    return await fetch(
-      `https://l8qn2l7t-80.brs.devtunnels.ms/fetch/post.php?url=${url}/api/json/convert`,
-      {
-        method: "POST",
-        headers: {
-          headers: JSON.stringify([
-            "Content-Type: application/x-www-form-urlencoded",
-            "X-Requested-Key: de0cfuirtgf67a",
-            "X-Requested-With: XMLHttpRequest",
-          ]),
-        },
-        body: formData,
-      }
-    )
-      .then((res) => res.json())
-      .then(async (res) => {
-        if (res.statusCode == 200) {
-          return { status: true, url: res.result };
-        } else if (res.statusCode == 300) {
-          return await this.__convert_3(res, url);
-        }
-      });
-  }
-
-  async __convert_3(res, url) {
-    return new Promise((resolve, reject) => {
-      const r = new URL(url);
-      const u = r.protocol == "https:" ? "wss:" : "ws:";
-
-      const f = `${u}//${r.host}/sub/${res.jobId}?fname=Y2meta.app`;
-      const socket = new WebSocket(f);
-      socket.onmessage = function (n) {
-        const data = JSON.parse(n.data);
-        if (data.action === "success") {
-          resolve({ status: true, url: data.url });
-          socket.close();
-        }
-      };
-
-      socket.onerror = function (error) {
-        reject(error);
-      };
-    });
-  }
-
+  
   async get(parameters) {
     while (this._token === null)
       await new Promise((resolve) => setTimeout(resolve, 50));
@@ -207,10 +127,5 @@ class YoutubeMedia {
     return await this.__list(this._token, parameters.id).then((list) => {
       return list;
     });
-  }
-
-  async set(parameters = {}) {
-    await this.get(parameters);
-    return await this.__convert_1(parameters);
   }
 }
