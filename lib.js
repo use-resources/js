@@ -820,9 +820,22 @@ function socketIO(url, name = "socketIO", array = []) {
 }
 
 function encodeQueryObject(query) {
-  return Object.keys(query)
-    .map((key) => `${key}=${encodeURIComponent(query[key])}`)
-    .join("&");
+  if (query instanceof Object) {
+    return Array.from([query])
+      .flat()
+      .map((query) => {
+        return Object.entries(query)
+          .map((query) => {
+            return [
+              encodeURIComponent(query[0]),
+              encodeURIComponent(query[1]),
+            ].join("=");
+          })
+          .join("&");
+      })
+      .join("&");
+  }
+  return "";
 }
 
 class IntersectionObserverImage {
