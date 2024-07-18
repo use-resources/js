@@ -219,6 +219,7 @@ function defineVal(value) {
   const object = new Object();
   const customEvent = new CustomEvent("_value");
   const nodeVal = document.createTextNode("");
+  const unobserves = [];
 
   const listener = (callback) => {
     const listener = () => callback(object.value);
@@ -227,7 +228,13 @@ function defineVal(value) {
 
     listener();
     observe();
+
+    unobserves.push(unobserve);
     return () => unobserve();
+  };
+
+  const listeners = () => {
+    unobserves.forEach((unobserve) => unobserve());
   };
 
   Object.defineProperty(object, "_value", {
@@ -238,16 +245,17 @@ function defineVal(value) {
   });
 
   Object.defineProperty(object, "value", {
-    get: function () {
+    get: () => {
       return this._value;
     },
-    set: function (value) {
+    set: (value) => {
       if (this._value !== value) {
         this._value = value;
         nodeVal.dispatchEvent(customEvent);
       }
     },
   });
+
   Object.defineProperty(object, "observe", {
     value: listener,
     writable: false,
@@ -255,8 +263,14 @@ function defineVal(value) {
     configurable: false,
   });
 
-  Object.seal(object);
+  Object.defineProperty(object, "unobserve", {
+    value: listeners,
+    writable: false,
+    enumerable: false,
+    configurable: false,
+  });
 
+  Object.seal(object);
   return object;
 }
 
