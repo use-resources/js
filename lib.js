@@ -1012,9 +1012,11 @@ class RouteHashCallback {
       };
     });
   };
-
-  params = () => {
-    return this._params;
+  
+  params = (key = null) => {
+    return typeof key == "string"
+      ? this._params[key]
+      : JSON.parse(JSON.stringify(this._params));
   };
 }
 
