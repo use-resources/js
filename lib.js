@@ -245,10 +245,10 @@ function defineVal(value) {
   });
 
   Object.defineProperty(object, "value", {
-    get: () => {
+    get: function () {
       return this._value;
     },
-    set: (value) => {
+    set: function (value) {
       if (this._value !== value) {
         this._value = value;
         nodeVal.dispatchEvent(customEvent);
