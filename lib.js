@@ -943,3 +943,78 @@ function storageObject(storage, object, replace = true) {
     storage.setItem(object[0], object[1]);
   });
 }
+
+class RouteHashCallback {
+  constructor() {
+    this._params = {};
+    this._set = [];
+  }
+
+  __hash = (string) => {
+    const array = string.split("/").filter((string) => string);
+    array[0] = "#";
+    return array;
+  };
+
+  get = () => {
+    const hash = this.__hash(location.hash || "#/");
+    const exists = this._set.find((set) => {
+      if (set.all != -1) {
+        return (location.hash || "#/").startsWith(
+          set.hash.arrayString.slice(0, set.all).join("/")
+        );
+      }
+
+      if (set.hash.arrayObject.length == hash.length) {
+        const valid = hash.every((name, i) => {
+          if (set.hash.arrayObject[i].status) {
+            this._params[set.hash.arrayObject[i].name] = name;
+            return true;
+          }
+
+          return name === set.hash.arrayObject[i].name;
+        });
+
+        return valid;
+      }
+
+      return false;
+    });
+
+    if (exists) {
+      if (typeof exists.callback == "function") {
+        return exists.callback(this._params);
+      }
+    }
+
+    return null;
+  };
+
+  set = (array) => {
+    this._set = array.map((object) => {
+      const array = this.__hash(`#/${object.hash}`);
+      let all = -1;
+
+      return {
+        hash: {
+          arrayObject: array.map((string, index) => {
+            if (all == -1 && string == "*") all = index;
+
+            return {
+              status: string.startsWith(":"),
+              name: string.startsWith(":") ? string.slice(1) : string,
+            };
+          }),
+          arrayString: array,
+        },
+        callback: object.callback,
+        all,
+      };
+    });
+  };
+
+  params = () => {
+    return this._params;
+  };
+}
+
