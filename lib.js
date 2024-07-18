@@ -936,3 +936,9 @@ function isURL(url) {
 function addLeadingZeros(number, totalDigits = 5) {
   return number.toString().padStart(totalDigits, "0");
 }
+
+function storageObject(storage, object = {}) {
+  Object.entries(object).forEach((object) => {
+    storage.setItem(object[0], object[1]);
+  });
+}
