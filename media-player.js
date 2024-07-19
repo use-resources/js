@@ -415,7 +415,7 @@ class MediaPlayer {
           }
         }
       }
-    });
+    }, { passive: true });
 
     $elements.openOptions.addEventListener("click", () => {
       styleElement($elements.controlView, {
