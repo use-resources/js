@@ -1,8 +1,8 @@
 import { readdir, stat, readFile, writeFile } from "fs/promises";
 import path from "path";
 
-const dirCssInput = "input";
-const dirCssOutput = "ouput";
+const dirInput = "input";
+const dirOutput = "ouput";
 
 async function readDirectory(directory) {
   try {
@@ -24,14 +24,14 @@ async function readFileContent(filePath) {
 }
 
 async function main() {
-  let print = await readFileContent(dirCssOutput);
+  let print = await readFileContent(dirOutput);
 
   while (true) {
     const bundle = [];
-    const folders = await readDirectory(dirCssInput);
+    const folders = await readDirectory(dirInput);
 
     for (const folder of folders) {
-      const folderPath = path.join(dirCssInput, folder);
+      const folderPath = path.join(dirInput, folder);
       const folderStats = await stat(folderPath);
 
       if (folderStats.isDirectory()) {
@@ -56,7 +56,7 @@ async function main() {
     if (print !== bundleContent) {
       console.log("actualizado", Date.now());
       print = bundleContent;
-      await writeFile(dirCssOutput, bundleContent);
+      await writeFile(dirOutput, bundleContent);
       await new Promise((resolve) => setTimeout(resolve, 1000)); // Equivalente a sleep(1) en PHP
     }
   }
