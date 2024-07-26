@@ -361,7 +361,7 @@ async function resizeCanvasImage(url, resizes) {
     if (!Array.isArray(resizes)) return reject({ status: false, images: [] });
 
     const image = new Image();
-    //image.crossOrigin = "Anonymous";
+    image.crossOrigin = "Anonymous";
     image.src = url;
 
     image.addEventListener("load", () => {
@@ -407,7 +407,7 @@ async function resizeCanvasImage(url, resizes) {
         return {
           width: width,
           height: height,
-          url: (type) => canvas.toDataURL(type ?? "image/png"),
+          url: (type) => canvas.toDataURL(type || "image/png"),
           canvas,
         };
       });
