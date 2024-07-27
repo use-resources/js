@@ -957,6 +957,8 @@ class RouteHashCallback {
   };
 
   get = () => {
+    this._params = {};
+    
     const hash = this.__hash(location.hash || "#/");
     const exists = this._set.find((set) => {
       if (set.all != -1) {
