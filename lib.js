@@ -1022,3 +1022,12 @@ class RouteHashCallback {
   };
 }
 
+function getBase64Size(base64String) {
+  const base64Data = base64String.replace(/^data:[a-z]+\/[a-z]+;base64,/, "");
+  const base64Length = base64Data.length;
+  const sizeInBytes =
+    (base64Length * 3) / 4 -
+    (base64Data.endsWith("==") ? 2 : base64Data.endsWith("=") ? 1 : 0);
+  return sizeInBytes;
+}
+
