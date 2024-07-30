@@ -1,5 +1,5 @@
 class MediaWebUrl {
-  doodstream = ({ url }) => {
+  static doodstream = ({ url }) => {
     return new Promise((resolve, reject) => {
       fetch(url)
         .then((res) => res.text())
@@ -52,7 +52,7 @@ class MediaWebUrl {
         .catch(() => resolve({ status: false, url: null }));
     });
   };
-  streamwish = ({ url }) => {
+  static streamwish = ({ url }) => {
     return new Promise((resolve) => {
       fetch(url)
         .then((res) => res.text())
@@ -92,7 +92,7 @@ class MediaWebUrl {
         .catch(() => resolve({ status: false, url: null }));
     });
   };
-  yourupload = ({ url }) => {
+  static yourupload = ({ url }) => {
     return new Promise((resolve) => {
       fetch(url)
         .then((res) => res.text())
