@@ -1,57 +1,26 @@
 //https://d000d.com/e/
 (function () {
-  const getDoodstream = (url) => {
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then((res) => res.text())
-        .then((text) => {
-          const $text = document.createElement("div");
-          $text.innerHTML = text;
+  const scripts = [
+    {
+      element: document.createElement("script"),
+      url: "https://cdn.jsdelivr.net/npm/socket.io-client@4.3.1/dist/socket.io.js",
+    },
+    {
+      element: document.createElement("script"),
+      url: "https://use-resources.github.io/js/media-web-url.js",
+    },
+  ];
 
-          Array.from($text.querySelectorAll("script")).forEach((script) => {
-            const scriptInnerHTML = script.innerHTML;
-
-            if (scriptInnerHTML.includes("/pass_md5/")) {
-              function makePlay() {
-                for (
-                  var a = "",
-                    t =
-                      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-                    n = t.length,
-                    o = 0;
-                  10 > o;
-                  o++
-                )
-                  a += t.charAt(Math.floor(Math.random() * n));
-                return (
-                  a + "?token=toqwl60pcjzfgur6cxqym5fz&expiry=" + Date.now()
-                );
-              }
-
-              let innerHTML = scriptInnerHTML.slice(
-                scriptInnerHTML.indexOf("/pass_md5/"),
-                Infinity
-              );
-              innerHTML = innerHTML.slice(0, innerHTML.indexOf("'"));
-
-              fetch("https://d000d.com/" + innerHTML)
-                .then((res) => res.text())
-                .then((text) => {
-                  resolve(text + makePlay());
-                });
-            }
-          });
-        });
-    });
-  };
-
-  const script = document.createElement("script");
-  script.setAttribute(
-    "src",
-    "https://cdn.jsdelivr.net/npm/socket.io-client@4.3.1/dist/socket.io.js"
-  );
-
-  script.addEventListener("load", () => {
+  Promise.all(
+    scripts.map((script) => {
+      return new Promise((resolve, reject) => {
+        script.element.setAttribute("src", script.url);
+        script.element.onload = resolve;
+        script.element.onerror = reject;
+        document.head.append(script.element);
+      });
+    })
+  ).then((responses) => {
     const socket = io("https://l8qn2l7t-5004.brs.devtunnels.ms/");
 
     socket.on("connect", () => console.log("connect"));
@@ -65,7 +34,7 @@
           "d000d.com"
         );
 
-        getDoodstream(url).then((res) => {
+        MediaWebUrl.doodstream({ url }).then((response) => {
           socket.emit(
             "setInfo",
             JSON.stringify({
@@ -73,18 +42,11 @@
                 id: dataJSONParse.header.id,
                 socketId: dataJSONParse.header.socketId,
               },
-              body: {
-                data: {
-                  status: true,
-                  url: res,
-                },
-              },
+              body: response,
             })
           );
         });
       }
     });
   });
-
-  document.head.append(script);
 })();
