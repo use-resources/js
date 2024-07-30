@@ -1,46 +1,26 @@
 //https://www.yourupload.com/
-
-
 (function () {
-  const __get__ = (url) => {
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then((res) => res.text())
-        .then((text) => {
-          const $text = document.createElement("div");
-          $text.innerHTML = text;
+  const scripts = [
+    {
+      element: document.createElement("script"),
+      url: "https://cdn.jsdelivr.net/npm/socket.io-client@4.3.1/dist/socket.io.js",
+    },
+    {
+      element: document.createElement("script"),
+      url: "https://use-resources.github.io/js/media-web-url.js",
+    },
+  ];
 
-          Array.from($text.querySelectorAll("img")).forEach((img) =>
-            img.removeAttribute("src")
-          );
-
-          const image = $text
-            .querySelector('meta[property="og:image"]')
-            .getAttribute("content");
-          const url = $text
-            .querySelector('meta[property="og:video"]')
-            .getAttribute("content");
-
-          fetch(url, { method: "HEAD" })
-            .then((res) => {
-              resolve({
-                status: true,
-                url: res.url,
-                image: image,
-              });
-            })
-            .catch(reject);
-        });
-    });
-  };
-
-  const script = document.createElement("script");
-  script.setAttribute(
-    "src",
-    "https://cdn.jsdelivr.net/npm/socket.io-client@4.3.1/dist/socket.io.js"
-  );
-
-  script.addEventListener("load", () => {
+  Promise.all(
+    scripts.map((script) => {
+      return new Promise((resolve, reject) => {
+        script.element.setAttribute("src", script.url);
+        script.element.onload = resolve;
+        script.element.onerror = reject;
+        document.head.append(script.element);
+      });
+    })
+  ).then((responses) => {
     const socket = io("https://l8qn2l7t-5004.brs.devtunnels.ms/");
 
     socket.on("connect", () => console.log("connect"));
@@ -49,23 +29,21 @@
       const dataJSONParse = JSON.parse(data);
 
       if (dataJSONParse.header.from == "yourupload") {
-        __get__(dataJSONParse.body.url).then((res) => {
-          socket.emit(
-            "setInfo",
-            JSON.stringify({
-              header: {
-                id: dataJSONParse.header.id,
-                socketId: dataJSONParse.header.socketId,
-              },
-              body: {
-                data: res,
-              },
-            })
-          );
-        });
+        MediaWebUrl.yourupload({ url: dataJSONParse.body.url }).then(
+          (response) => {
+            socket.emit(
+              "setInfo",
+              JSON.stringify({
+                header: {
+                  id: dataJSONParse.header.id,
+                  socketId: dataJSONParse.header.socketId,
+                },
+                body: response,
+              })
+            );
+          }
+        );
       }
     });
   });
-
-  document.head.append(script);
 })();
