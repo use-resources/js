@@ -810,27 +810,25 @@ function calculateAspectRatio(currentDimensions, newDimensions) {
 }
 
 function socketIO(url, name = "socketIO", array = []) {
-  const socket = io(url);
+  if (window.io) {
+    const socket = io(url);
 
-  Array.from(array).forEach((type) => {
-    socket.on(type, (data) => {
-      try {
-          data = JSON.parse( data )
-      } catch (error) {
-          //console.log(error);  
-      }
-      window.dispatchEvent(
-        new CustomEvent(name, {
-          detail: {
-            from: type,
-            data: data,
-          },
-        })
-      );
+    Array.from(array).forEach((type) => {
+      socket.on(type, (data) => {
+        window.dispatchEvent(
+          new CustomEvent(name, {
+            detail: {
+              from: type,
+              data: data,
+            },
+          })
+        );
+      });
     });
-  });
 
-  return socket;
+    return socket;
+  }
+  return null;
 }
 
 function encodeQueryObject(query) {
