@@ -40,7 +40,7 @@ function createNodeFragment(...elements) {
   return fragment;
 }
 
-function replaceNodeChildren(element, children = {}, attribute = false) {
+function replaceNodeChildren(element, children = {}) {
   const isAppend = (element) =>
     element instanceof Text ||
     element instanceof String ||
@@ -50,21 +50,29 @@ function replaceNodeChildren(element, children = {}, attribute = false) {
     false;
 
   if (isAppend(element)) {
-    element.querySelectorAll("[data-node-children]").forEach((child) => {
-      const childObj = children[child.getAttribute("data-node-children")];
-      if (isAppend(childObj)) {
-        child.removeAttribute("data-node-children");
-        child.replaceWith(childObj);
+    element
+      .querySelectorAll("[replace-node-children], [data-node-children]")
+      .forEach((child) => {
+        const childObj =
+          children[child.getAttribute("replace-node-children")] ||
+          children[child.getAttribute("data-node-children")];
+        if (isAppend(childObj)) {
+          child.removeAttribute("replace-node-children");
+          child.removeAttribute("data-node-children");
+          child.replaceWith(childObj);
 
-        if (attribute) {
-          Array.from(child.attributes).forEach((attribute) =>
-            childObj.setAttribute(attribute.name, attribute.value)
-          );
+          Array.from(child.attributes).forEach((attribute) => {
+            childObj.setAttribute(
+              attribute.name,
+              `${childObj.getAttribute(attribute.name) || ""} ${
+                attribute.value
+              }`.trim()
+            );
+          });
+        } else {
+          child.remove();
         }
-      } else {
-        child.remove();
-      }
-    });
+      });
   }
 
   return element;
