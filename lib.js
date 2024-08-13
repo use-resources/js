@@ -1037,3 +1037,31 @@ function getBase64Size(base64String) {
   return sizeInBytes;
 }
 
+function imageUrlToCanvas(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "Anonymous"; // Necesario si la imagen es de otro dominio
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      resolve(canvas);
+    };
+    img.onerror = (err) => {
+      reject(new Error("Failed to load image: " + err.message));
+    };
+    img.src = url;
+  });
+}
+
+function JSONparse(string) {
+  try {
+    return JSON.parse(string);
+  } catch (error) {
+    return string;
+  }
+}
+
+
