@@ -1064,4 +1064,19 @@ function JSONparse(string) {
   }
 }
 
+function getFileNameWithoutExtension(filePath) {
+  // Extraer el nombre completo del archivo con la extensión
+  const fileNameWithExtension = filePath.split("/").pop();
+
+  // Dividir el nombre del archivo por el punto y eliminar la última parte (la extensión)
+  const fileNameParts = fileNameWithExtension.split(".");
+
+  // Si el archivo tiene extensión, eliminamos la última parte
+  if (fileNameParts.length > 1) {
+    fileNameParts.pop();
+  }
+
+  // Unimos las partes restantes para obtener el nombre del archivo sin extensión
+  return fileNameParts.join(".");
+}
 
