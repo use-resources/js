@@ -59,10 +59,10 @@ class MediaWebUrl {
         .then((text) => {
           const $text = document.createElement("div");
           $text.innerHTML = text;
-
-          const script = Array.from($text.querySelectorAll("script")).slice(
-            -2
-          )[0];
+          
+          const script = Array.from($text.querySelectorAll("script")).find(
+            (script) => script.innerHTML.includes("eval")
+          );
           const script2 = script.innerHTML.slice(
             script.innerHTML.indexOf("}('") + 2,
             script.innerHTML.lastIndexOf("))")
