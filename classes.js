@@ -1,0 +1,215 @@
+class RouteHashCallback {
+  constructor() {
+    this._params = {};
+    this._set = [];
+  }
+
+  __hash = (string) => {
+    const array = string.split("/").filter((string) => string);
+    array[0] = "#";
+    return array;
+  };
+
+  get = () => {
+    this._params = {};
+
+    const hash = this.__hash(location.hash || "#/");
+    const exists = this._set.find((set) => {
+      if (set.all != -1) {
+        return (location.hash || "#/").startsWith(
+          set.hash.arrayString.slice(0, set.all).join("/")
+        );
+      }
+
+      if (set.hash.arrayObject.length == hash.length) {
+        const valid = hash.every((name, i) => {
+          if (set.hash.arrayObject[i].status) {
+            this._params[set.hash.arrayObject[i].name] = name;
+            return true;
+          }
+
+          return name === set.hash.arrayObject[i].name;
+        });
+
+        return valid;
+      }
+
+      return false;
+    });
+
+    if (exists) {
+      if (typeof exists.callback == "function") {
+        return exists.callback(this._params);
+      }
+    }
+
+    return null;
+  };
+
+  set = (array) => {
+    this._set = array.map((object) => {
+      const array = this.__hash(`#/${object.hash}`);
+      let all = -1;
+
+      return {
+        hash: {
+          arrayObject: array.map((string, index) => {
+            if (all == -1 && string == "*") all = index;
+
+            return {
+              status: string.startsWith(":"),
+              name: string.startsWith(":") ? string.slice(1) : string,
+            };
+          }),
+          arrayString: array,
+        },
+        callback: object.callback,
+        all,
+      };
+    });
+  };
+
+  params = (key = null) => {
+    return typeof key == "string"
+      ? this._params[key]
+      : JSON.parse(JSON.stringify(this._params));
+  };
+}
+
+class IntersectionObserverImage {
+  static intersectionObserver = null;
+  static images = [];
+
+  static {
+    this.intersectionObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const image = entry.target;
+            observer.unobserve(image);
+            this.__load(image);
+          }
+        });
+      },
+      { root: null, rootMargin: "0px", threshold: 0 }
+    );
+  }
+
+  static __load = (image) => {
+    let loop = 0;
+
+    const arEventListerner = (element, type, callback) => {
+      element.addEventListener(type, callback);
+      return () => element.removeEventListener(type, callback);
+    };
+
+    const remove = arEventListerner(image, "error", () => {
+      if (++loop > 3) return remove();
+      image.setAttribute("src", image.getAttribute("data-src"));
+    });
+
+    const add = arEventListerner(image, "load", () => {
+      add();
+      remove();
+      image.style.opacity = 1;
+    });
+
+    image.setAttribute("src", image.getAttribute("data-src"));
+  };
+
+  static load = (element, observe = true) => {
+    if (element.tagName == "IMG") {
+      element.style.opacity = 0;
+      if (observe) {
+        this.images.push(element);
+        this.intersectionObserver.observe(element);
+        return () => this.intersectionObserver.unobserve(element);
+      } else this.__load(element);
+    }
+
+    return null;
+  };
+
+  static clear = () => {
+    this.images.forEach((image) => this.intersectionObserver.unobserve(image));
+  };
+}
+
+class RenderRouteHash {
+  constructor() {
+    this._params = [];
+    this._routes = [];
+  }
+  param(route = "", callback = false) {
+    const dinamic = route.includes("/:");
+    route = trimString(route).both("/");
+    this._routes.push({ route, callback, dinamic });
+  }
+  render() {
+    const params = {};
+    this._params = trimString(location.hash.slice(1)).both("/");
+
+    const findRoute = this._routes.find((route) => {
+      if (route.dinamic) {
+        const splitRoute = route.route.split("/");
+        const splitParam = this._params.split("/");
+
+        if (splitRoute.length == splitParam.length) {
+          for (let i = 0; i < splitRoute.length; i++) {
+            const textRoute = splitRoute[i].trim();
+            if (textRoute.startsWith(":"))
+              params[textRoute.slice(1)] = splitParam[i];
+            else if (textRoute !== splitParam[i]) return false;
+          }
+
+          return route;
+        }
+      } else if (route.route == this._params) {
+        return route;
+      } else if (route.route == "*") {
+        return route;
+      }
+
+      return false;
+    });
+
+    if (findRoute) {
+      sessionStorage.setItem("params", JSON.stringify(params));
+      window.dataLib.params = params;
+      return findRoute.callback(params);
+    }
+  }
+}
+
+class RenderObjectElement {
+  constructor(objectElement = {}) {
+    this.savedElement = Object.keys(objectElement).reduce((prev, curr) => {
+      prev[curr] = {
+        element: objectElement[curr],
+        elementText: document.createTextNode(""),
+        parent: objectElement[curr].parentElement,
+        status: true,
+      };
+      return prev;
+    }, {});
+  }
+
+  set(object) {
+    Object.keys(object).forEach((key) => {
+      const savedElementKey = this.savedElement[key];
+      if (savedElementKey) {
+        savedElementKey.status = object[key];
+
+        if (savedElementKey.status) {
+          if (!savedElementKey.element.parentElement) {
+            savedElementKey.elementText.replaceWith(savedElementKey.element);
+          }
+        } else {
+          if (savedElementKey.element.parentElement) {
+            savedElementKey.element.replaceWith(savedElementKey.elementText);
+          }
+        }
+      }
+    });
+  }
+}
