@@ -122,7 +122,7 @@ function trimString(text = "") {
   return { left, right, both };
 }
 
-function encodeInput = (string = "") => {
+function encodeInput(string = ""){
   if (string.trim() != "") {
     const input = document.createElement("input");
     input.setAttribute("value", string);
@@ -132,7 +132,7 @@ function encodeInput = (string = "") => {
   return string;
 };
 
-function encodeTextarea = (string = "") => {
+function encodeTextarea(string = ""){
   if (string.trim() != "") {
     const textTarea = document.createElement("textarea");
     textTarea.innerHTML = string;
