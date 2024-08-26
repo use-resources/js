@@ -74,4 +74,37 @@ class ApiCuevana {
         .catch(reject);
     });
   };
+
+  static server = (url) => {
+    return new Promise((resolve, reject) => {
+      fetch(
+        `https://api-fetch.victor01sp.com/get.php?url=${encodeURIComponent(
+          url
+        )}`
+      )
+        .then((res) => res.text())
+        .then((text) => {
+          const $text = document.createElement("div");
+          $text.innerHTML = text;
+
+          Array.from($text.querySelectorAll("img")).forEach((img) => {
+            img.removeAttribute("src");
+            img.removeAttribute("srcset");
+          });
+
+          Array.from($text.querySelectorAll("script")).forEach((script) => {
+            if (script.innerHTML.includes("var url =")) {
+              const scriptFunction = new Function(
+                [
+                  script.innerHTML.split(";").slice(0, 2).join(";").trim(),
+                  "return url",
+                ].join(";")
+              );
+              resolve(scriptFunction());
+            }
+          });
+        })
+        .then(reject);
+    });
+  };
 }
