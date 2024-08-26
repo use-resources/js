@@ -32,6 +32,12 @@ class ApiCuevana {
           return `https://cuevana.biz/_next/data/npsUg335OXnW9LSY_6Esg/es/pelicula/${parameters.id}/data.json`;
         if (parameters.page)
           return `https://cuevana.biz/_next/data/npsUg335OXnW9LSY_6Esg/es/peliculas/page/${parameters.page}.json`;
+        if (parameters.gender)
+          return `https://cuevana.biz/_next/data/npsUg335OXnW9LSY_6Esg/es/genero/${parameters.gender
+            .split(" ")
+            .filter((string) => string)
+            .join("-")
+            .toLowerCase()}.json`;
         return "";
       })(parameters);
 
@@ -61,23 +67,6 @@ class ApiCuevana {
       fetch(
         `https://api-fetch.victor01sp.com/get.php?url=${encodeURIComponent(
           url
-        )}`
-      )
-        .then((res) => res.json())
-        .then(resolve)
-        .catch(reject);
-    });
-  };
-
-  static gender = (gender) => {
-    return new Promise((resolve, reject) => {
-      fetch(
-        `https://api-fetch.victor01sp.com/get.php?url=${encodeURIComponent(
-          `https://cuevana.biz/_next/data/npsUg335OXnW9LSY_6Esg/es/genero/${gender
-            .split(" ")
-            .filter((string) => string)
-            .join("-")
-            .toLowerCase()}.json`
         )}`
       )
         .then((res) => res.json())
