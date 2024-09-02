@@ -861,3 +861,8 @@ function getFileNameWithoutExtension(filePath) {
   // Unimos las partes restantes para obtener el nombre del archivo sin extensión
   return fileNameParts.join(".");
 }
+
+function toggleOptions(option = "", options = []) {
+  const index = options.findIndex((_option) => _option == option);
+  return options[index + 1] || options[0];
+}
