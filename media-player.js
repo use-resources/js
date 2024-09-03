@@ -387,7 +387,7 @@ class MediaPlayer {
       "touchstart",
       (e) => {
         if ($elements.toggleSpeed.checked) {
-          if (!video.paused) {
+          if (!$elements.video.paused) {
             if (e.touches.length === 1) {
               const timeoutTouchend = setTimeout(() => {
                 styleElement($elements.controlView, {
