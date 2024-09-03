@@ -622,7 +622,7 @@ class MediaPlayer {
       this.__elements.videoDescription.textContent = data.description;
     if (data.controls) {
       const buttons = Array.from(
-        this.__elements.optionsButtons.querySelectorAll("button")
+        this.__elements.divOptionsButtons.querySelectorAll("button")
       );
 
       data.controls.includesYes = Array.isArray(data.controls.includesYes)
