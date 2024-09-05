@@ -866,3 +866,16 @@ function toggleOptions(option = "", options = []) {
   const index = options.findIndex((_option) => _option == option);
   return options[index + 1] || options[0];
 }
+
+function fetchWebElement(url) {
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then((res) => res.text())
+      .then((text) => {
+        const $text = document.createElement("div");
+        $text.innerHTML = text;
+        resolve($text);
+      })
+      .catch(reject);
+  });
+}
