@@ -684,3 +684,5 @@ class MediaPlayer {
     this.__elements.video.setAttribute("src", "");
   };
 }
+
+
