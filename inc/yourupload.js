@@ -1,0 +1,1 @@
+import("https://use-resources.github.io/js/exp/media-web-url.js").then(e=>{let t=e.default;window.addEventListener("message",e=>{if(e.origin!==location.origin)t.yourupload({url:e.data.url}).then(t=>{e.source.postMessage({response:t,data:e.data},e.origin)})})});
