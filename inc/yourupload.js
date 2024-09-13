@@ -1,1 +1,1 @@
-import("https://use-resources.github.io/js/exp/media-web-url.js").then(e=>{let t=e.default;window.addEventListener("message",e=>{if(e.origin!==location.origin)t.yourupload({url:e.data.url}).then(t=>{e.source.postMessage({response:t,data:e.data},e.origin)})})});
+import("https://use-resources.github.io/js/exp/media-web-url.js").then(e=>{let s=e.default;addEventListener("message",e=>{if(e.origin!==location.origin)s.yourupload({url:e.data.url}).then(s=>{e.source.postMessage({response:s,data:e.data},e.origin)})})});
