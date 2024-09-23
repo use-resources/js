@@ -752,3 +752,113 @@ function fetchWebElement(url) {
       .catch(reject);
   });
 }
+
+function getDominantColor(imgElement) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.crossOrigin = "Anonymous"; // Por si la imagen viene de un dominio externo
+    image.src = imgElement.src;
+
+    image.onload = function () {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+
+      // Ajustar el tamaño del canvas al de la imagen
+      canvas.width = image.width;
+      canvas.height = image.height;
+
+      // Dibujar la imagen en el canvas
+      context.drawImage(image, 0, 0);
+
+      // Obtener los datos de los píxeles
+      const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      const pixels = imageData.data;
+      const pixelCount = pixels.length / 4;
+
+      let r = 0,
+        g = 0,
+        b = 0;
+
+      // Sumar todos los valores de los píxeles
+      for (let i = 0; i < pixels.length; i += 4) {
+        r += pixels[i];
+        g += pixels[i + 1];
+        b += pixels[i + 2];
+      }
+
+      // Promediar los valores RGB
+      r = Math.round(r / pixelCount);
+      g = Math.round(g / pixelCount);
+      b = Math.round(b / pixelCount);
+
+      // Función para convertir de RGB a HEX
+      const rgbToHex = (r, g, b) => {
+        const toHex = (c) => c.toString(16).padStart(2, "0");
+        return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+      };
+
+      const dominantColorHex = rgbToHex(r, g, b);
+      resolve(dominantColorHex); // Devolver el color dominante
+    };
+
+    image.onerror = reject;
+  });
+}
+
+function getTextColorBasedOnBackground(hexColor) {
+  // Convierte el HEX a valores RGB
+  const hexToRgb = (hex) => {
+    let hexCleaned = hex.replace("#", "");
+    if (hexCleaned.length === 3) {
+      hexCleaned = hexCleaned
+        .split("")
+        .map((h) => h + h)
+        .join("");
+    }
+    const r = parseInt(hexCleaned.substring(0, 2), 16);
+    const g = parseInt(hexCleaned.substring(2, 4), 16);
+    const b = parseInt(hexCleaned.substring(4, 6), 16);
+    return { r, g, b };
+  };
+
+  // Calcula el brillo según la fórmula de luminosidad perceptiva
+  const getBrightness = ({ r, g, b }) => {
+    return r * 0.299 + g * 0.587 + b * 0.114;
+  };
+
+  const rgb = hexToRgb(hexColor);
+  const brightness = getBrightness(rgb);
+
+  // Umbral típico para determinar si usar blanco o negro (128 es el punto medio de brillo)
+  return brightness > 128 ? "#000000" : "#FFFFFF";
+}
+
+function isBackgroundTooLightForWhiteText(hexColor) {
+  // Convierte HEX a RGB
+  const hexToRgb = (hex) => {
+    let hexCleaned = hex.replace("#", "");
+    if (hexCleaned.length === 3) {
+      hexCleaned = hexCleaned
+        .split("")
+        .map((h) => h + h)
+        .join("");
+    }
+    const r = parseInt(hexCleaned.substring(0, 2), 16);
+    const g = parseInt(hexCleaned.substring(2, 4), 16);
+    const b = parseInt(hexCleaned.substring(4, 6), 16);
+    return { r, g, b };
+  };
+
+  // Calcula el brillo usando la fórmula de luminosidad perceptiva
+  const getBrightness = ({ r, g, b }) => {
+    return r * 0.299 + g * 0.587 + b * 0.114;
+  };
+
+  // Convierte el color y calcula el brillo
+  const rgb = hexToRgb(hexColor);
+  const brightness = getBrightness(rgb);
+
+  // Si el brillo es alto, el fondo es demasiado claro para texto blanco (umbral = 240)
+  // Este valor de 240 es empírico, ya que el máximo brillo es 255 (blanco puro)
+  return brightness < 240;
+}
