@@ -167,3 +167,41 @@ class RenderObjectElement {
     });
   }
 }
+
+class Cookie {
+  static set(name, value, options = {}) {
+    let { lifetime = 0, path = "/", domain = "", samesite = "Lax" } = options;
+
+    let expires = "";
+    if (lifetime) {
+      const date = new Date();
+      date.setTime(date.getTime() + lifetime * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+
+    document.cookie = `${name}=${encodeURIComponent(
+      value || ""
+    )}${expires}; path=${path}; domain=${domain}; samesite=${samesite}`;
+  }
+
+  static get(name = "") {
+    const cookies = document.cookie.split("; ");
+    if (name === "") {
+      return cookies.reduce((acc, cookie) => {
+        const [key, value] = cookie.split("=");
+        acc[key] = decodeURIComponent(value);
+        return acc;
+      }, {});
+    } else {
+      const cookie = cookies.find((cookie) => cookie.startsWith(name + "="));
+      return cookie ? decodeURIComponent(cookie.split("=")[1]) : null;
+    }
+  }
+
+  static remove(name, options) {
+    let { path = "/", domain = "" } = options;
+
+    const expires = "Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = `${name}=; expires=${expires}; path=${path}; domain=${domain};`;
+  }
+}
