@@ -136,7 +136,8 @@ class IntersectionObserverImage {
 }
 
 class RenderObjectElement {
-  constructor(objectElement = {}) {
+  constructor(objectElement = {}, mode = "replace") {
+    this._mode = mode;
     this.savedElement = Object.keys(objectElement).reduce((prev, curr) => {
       prev[curr] = {
         element: objectElement[curr],
@@ -148,23 +149,37 @@ class RenderObjectElement {
     }, {});
   }
 
-  set(object) {
-    Object.keys(object).forEach((key) => {
-      const savedElementKey = this.savedElement[key];
-      if (savedElementKey) {
-        savedElementKey.status = object[key];
+  set(object, mode = null) {
+    mode = mode || this._mode;
 
-        if (savedElementKey.status) {
-          if (!savedElementKey.element.parentElement) {
-            savedElementKey.elementText.replaceWith(savedElementKey.element);
-          }
-        } else {
-          if (savedElementKey.element.parentElement) {
-            savedElementKey.element.replaceWith(savedElementKey.elementText);
+    if (mode == "replace") {
+      Object.keys(object).forEach((key) => {
+        const savedElementKey = this.savedElement[key];
+        if (savedElementKey) {
+          savedElementKey.status = object[key];
+
+          if (savedElementKey.status) {
+            if (!savedElementKey.element.parentElement) {
+              savedElementKey.elementText.replaceWith(savedElementKey.element);
+            }
+          } else {
+            if (savedElementKey.element.parentElement) {
+              savedElementKey.element.replaceWith(savedElementKey.elementText);
+            }
           }
         }
-      }
-    });
+      });
+    }
+
+    if (mode == "display") {
+      Object.entries(object).forEach((entries) => {
+        if (this.savedElement[entries[0]]) {
+          this.savedElement[entries[0]].element.style.display = entries[1]
+            ? ""
+            : "none";
+        }
+      });
+    }
   }
 }
 
