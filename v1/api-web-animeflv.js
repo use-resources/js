@@ -230,7 +230,13 @@ class ApiWebAnimeflv {
                 .getAttribute("data-img-src");
               return {
                 id: parseInt(imgSrc.split("/").pop()),
-                identifier: li.querySelector("a").href.split("/").pop(),
+                identifier: li
+                  .querySelector("a")
+                  .href.split("/")
+                  .pop()
+                  .split("-")
+                  .slice(0, -1)
+                  .join("-"),
                 title: li.querySelector(".Title").textContent,
                 episode: li.querySelector("p span").innerText,
                 poster: `https://animeflv.net${imgSrc}`,
