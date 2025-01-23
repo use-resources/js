@@ -35,7 +35,7 @@ class ApiWebAnimeflv {
         .concat(toQuery(`page`, params.page))
         .join("&");
 
-      const url = `https://www3.animeflv.net/browse?${stringQuery}`;
+      const url = `https://m.animeflv.net/browse?${stringQuery}`;
       fetch(url)
         .then((res) => res.text())
         .then((text) => {
@@ -65,9 +65,6 @@ class ApiWebAnimeflv {
                     .getAttribute("data-img-src")
                     .replace("https://animeflv.net/", "")}`,
                   type: li.querySelector(".Type").textContent,
-                  overview:
-                    [...li.querySelectorAll("div.Description p")].at(-1)
-                      ?.textContent ?? "",
                 };
               });
 
@@ -207,6 +204,60 @@ class ApiWebAnimeflv {
           })
           .then(() => resolve(null));
       }
+    });
+  }
+
+  static home() {
+    return new Promise((resolve) => {
+      fetch("https://m.animeflv.net/")
+        .then((res) => res.text())
+        .then((text) => {
+          try {
+            const $text = document.createElement("div");
+            $text.innerHTML = text;
+
+            Array.from($text.querySelectorAll("img")).forEach((img) => {
+              img.setAttribute("data-img-src", img.getAttribute("src"));
+              img.removeAttribute("src");
+              img.removeAttribute("srcset");
+            });
+
+            const episodes = Array.from(
+              $text.querySelectorAll("ul.List-Episodes li.Episode:has(a)")
+            ).map((li) => {
+              const imgSrc = li
+                .querySelector("img")
+                .getAttribute("data-img-src");
+              return {
+                id: parseInt(imgSrc.split("/").pop()),
+                identifier: li.querySelector("a").href.split("/").pop(),
+                title: li.querySelector(".Title").textContent,
+                episode: li.querySelector("p span").innerText,
+                poster: `https://animeflv.net${imgSrc}`,
+              };
+            });
+
+            const animes = Array.from(
+              $text.querySelectorAll("ul.List-Animes li.Anime:has(a)")
+            ).map((li) => {
+              const imgSrc = li
+                .querySelector("img")
+                .getAttribute("data-img-src");
+              return {
+                id: parseInt(imgSrc.split("/").pop()),
+                identifier: li.querySelector("a").href.split("/").pop(),
+                title: li.querySelector(".Title").textContent,
+                type: li.querySelector(".Type").textContent,
+                poster: `https://animeflv.net${imgSrc}`,
+              };
+            });
+
+            resolve({ episodes, animes });
+          } catch (error) {
+            resolve({ animes: [], episodes: [] });
+          }
+        })
+        .catch(() => resolve({ animes: [], episodes: [] }));
     });
   }
 }
