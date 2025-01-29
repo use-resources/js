@@ -21,8 +21,9 @@ function elementComponentDraw(useParams) {
 
   const $element = createNodeElement(
     usethis.functions.declareVar(
-      (_) =>
-        `<div class="div_j46nnVSnu8tuV8" style="background:${_.background}"><div class="div_ak1IaKv"><div id="canvasBox" class="div_HPp5z9l" style="cursor: crosshair;"><canvas id="img-canvas" style="object-fit:contain"></canvas><canvas id="canvas"></canvas></div></div><div id="container-controls" class="div_Aqa0wxW"><div id="container-controls-bar" class="div_rmjk5xfg86dvogr3jvwy"><div class="div_ykgovoznvjn8f9uocd2q div_en26u61vg0k3ebqqc9f1"><label class="label_tYO6nSf label_rd4e5h0gakv26fgdsngm"><input id="color" type="color" value="${_.inputValue}"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-svg-name="fi fi-rr-fill"><path d="m22.327 18.422c.728 1.034 1.673 2.229 1.673 3.078a2.5 2.5 0 0 1 -5 0c0-.775.961-2.008 1.692-3.069a1 1 0 0 1 1.635-.009zm-.877-4.558-8.672 8.672a5.006 5.006 0 0 1 -7.071 0l-4.242-4.243a5 5 0 0 1 0-7.071l5.709-5.71-2.856-2.89a1 1 0 0 1 1.422-1.406l2.848 2.884 1.548-1.55-.843-.843a1 1 0 0 1 1.414-1.414l13 13a1 1 0 1 1 -1.414 1.414zm-1.414-1.414-8.486-8.486-1.557 1.558 4.718 4.778a1 1 0 1 1 -1.422 1.4l-4.709-4.765-5.7 5.7a3 3 0 0 0 0 4.243l4.242 4.243a3.005 3.005 0 0 0 4.243 0z"></path></svg></label><select id="range" class="select_Z1abqn2">${_.selectInnerHtml}</select><button id="button-toggle-bar" class="label_tYO6nSf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-angle-small-down"><path d="M18.71,8.21a1,1,0,0,0-1.42,0l-4.58,4.58a1,1,0,0,1-1.42,0L6.71,8.21a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.59,4.59a3,3,0,0,0,4.24,0l4.59-4.59A1,1,0,0,0,18.71,8.21Z"></path></svg></button></div><div class="div_ykgovoznvjn8f9uocd2q"><div class="div_KNf6yZy" style="pointer-events:initial;"><button id="undoButton" class="label_tYO6nSf" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-undo"><path d="M23,24a1,1,0,0,1-1-1,6.006,6.006,0,0,0-6-6H10.17v1.586A2,2,0,0,1,6.756,20L.877,14.121a3,3,0,0,1,0-4.242L6.756,4A2,2,0,0,1,10.17,5.414V7H15a9.01,9.01,0,0,1,9,9v7A1,1,0,0,1,23,24ZM8.17,5.414,2.291,11.293a1,1,0,0,0,0,1.414L8.17,18.586V16a1,1,0,0,1,1-1H16a7.984,7.984,0,0,1,6,2.714V16a7.008,7.008,0,0,0-7-7H9.17a1,1,0,0,1-1-1Z"></path></svg></button><button id="nextButton" class="label_tYO6nSf" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-redo"><path d="M0,23V16A9.01,9.01,0,0,1,9,7h4.83V5.414A2,2,0,0,1,17.244,4l5.88,5.879a3,3,0,0,1,0,4.242L17.244,20a2,2,0,0,1-3.414-1.414V17H8a6.006,6.006,0,0,0-6,6,1,1,0,0,1-2,0ZM15.83,8a1,1,0,0,1-1,1H9a7.008,7.008,0,0,0-7,7v1.714A7.984,7.984,0,0,1,8,15h6.83a1,1,0,0,1,1,1v2.586l5.879-5.879a1,1,0,0,0,0-1.414L15.83,5.414Z"></path></svg></button><select id="select-number" class="select_02coxcfxh1g7zj4uma0"><option>0/0</option></select><hr class="hr_ZMZWNsx"><button id="button-capas" class="label_tYO6nSf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-layers"><path d="M22.485,10.975,12,17.267,1.515,10.975A1,1,0,1,0,.486,12.69l11,6.6a1,1,0,0,0,1.03,0l11-6.6a1,1,0,1,0-1.029-1.715Z"></path><path d="M22.485,15.543,12,21.834,1.515,15.543A1,1,0,1,0,.486,17.258l11,6.6a1,1,0,0,0,1.03,0l11-6.6a1,1,0,1,0-1.029-1.715Z"></path><path d="M12,14.773a2.976,2.976,0,0,1-1.531-.425L.485,8.357a1,1,0,0,1,0-1.714L10.469.652a2.973,2.973,0,0,1,3.062,0l9.984,5.991a1,1,0,0,1,0,1.714l-9.984,5.991A2.976,2.976,0,0,1,12,14.773ZM2.944,7.5,11.5,12.633a.974.974,0,0,0,1,0L21.056,7.5,12.5,2.367a.974.974,0,0,0-1,0h0Z"></path></svg></button></div></div></div></div><div id="div-window-capas" class="div_iu0mg3dwkwmbyoj7291" popover=""><div class="div_U6lIo74rWt4J6POwaZVg" style="pointer-events: none;"><div class="div_8oil7437wu5pwrsop25" style="pointer-events: initial;"><div class="div_glbsedpokowmimbmbd6j"><button data-hide-window=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-angle-small-left"><path d="M10.6,12.71a1,1,0,0,1,0-1.42l4.59-4.58a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0L9.19,9.88a3,3,0,0,0,0,4.24l4.59,4.59a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42Z"></path></svg></button><h3>Capas</h3><div id="div-button-capas" style="margin-left:auto; display:flex; gap:10px; display:none"><button id="button-download" class="label_tYO6nSf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-download"><path d="M9.878,18.122a3,3,0,0,0,4.244,0l3.211-3.211A1,1,0,0,0,15.919,13.5l-2.926,2.927L13,1a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1l-.009,15.408L8.081,13.5a1,1,0,0,0-1.414,1.415Z"></path><path d="M23,16h0a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V17a1,1,0,0,0-1-1H1a1,1,0,0,0-1,1v4a3,3,0,0,0,3,3H21a3,3,0,0,0,3-3V17A1,1,0,0,0,23,16Z"></path></svg></button><button id="clearButton" class="label_tYO6nSf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-trash"><path d="M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z"></path><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z"></path><path d="M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"></path></svg></button></div></div><div id="div-list-capas" class="div_cou1gd2qeaa0xl1s90"></div></div></div></div></div>`,
+      (_) => `
+        <div class="div_j46nnVSnu8tuV8" style="background:${_.background}"><div class="div_ak1IaKv"><div id="canvasBox" class="div_HPp5z9l" style="cursor: crosshair;"><canvas id="img-canvas" style="object-fit:contain"></canvas><canvas id="canvas"></canvas></div></div><div id="container-controls" class="div_Aqa0wxW"><div id="container-controls-bar" class="div_rmjk5xfg86dvogr3jvwy"><div class="div_ykgovoznvjn8f9uocd2q div_en26u61vg0k3ebqqc9f1"><label class="label_tYO6nSf label_rd4e5h0gakv26fgdsngm"><input id="color" type="color" value="${_.inputValue}"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-svg-name="fi fi-rr-fill"><path d="m22.327 18.422c.728 1.034 1.673 2.229 1.673 3.078a2.5 2.5 0 0 1 -5 0c0-.775.961-2.008 1.692-3.069a1 1 0 0 1 1.635-.009zm-.877-4.558-8.672 8.672a5.006 5.006 0 0 1 -7.071 0l-4.242-4.243a5 5 0 0 1 0-7.071l5.709-5.71-2.856-2.89a1 1 0 0 1 1.422-1.406l2.848 2.884 1.548-1.55-.843-.843a1 1 0 0 1 1.414-1.414l13 13a1 1 0 1 1 -1.414 1.414zm-1.414-1.414-8.486-8.486-1.557 1.558 4.718 4.778a1 1 0 1 1 -1.422 1.4l-4.709-4.765-5.7 5.7a3 3 0 0 0 0 4.243l4.242 4.243a3.005 3.005 0 0 0 4.243 0z"></path></svg></label><select id="range" class="select_Z1abqn2">${_.selectInnerHtml}</select><button id="button-toggle-bar" class="label_tYO6nSf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-angle-small-down"><path d="M18.71,8.21a1,1,0,0,0-1.42,0l-4.58,4.58a1,1,0,0,1-1.42,0L6.71,8.21a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.59,4.59a3,3,0,0,0,4.24,0l4.59-4.59A1,1,0,0,0,18.71,8.21Z"></path></svg></button></div><div class="div_ykgovoznvjn8f9uocd2q"><div class="div_KNf6yZy" style="pointer-events:initial;"><button id="undoButton" class="label_tYO6nSf" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-undo"><path d="M23,24a1,1,0,0,1-1-1,6.006,6.006,0,0,0-6-6H10.17v1.586A2,2,0,0,1,6.756,20L.877,14.121a3,3,0,0,1,0-4.242L6.756,4A2,2,0,0,1,10.17,5.414V7H15a9.01,9.01,0,0,1,9,9v7A1,1,0,0,1,23,24ZM8.17,5.414,2.291,11.293a1,1,0,0,0,0,1.414L8.17,18.586V16a1,1,0,0,1,1-1H16a7.984,7.984,0,0,1,6,2.714V16a7.008,7.008,0,0,0-7-7H9.17a1,1,0,0,1-1-1Z"></path></svg></button><button id="nextButton" class="label_tYO6nSf" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-redo"><path d="M0,23V16A9.01,9.01,0,0,1,9,7h4.83V5.414A2,2,0,0,1,17.244,4l5.88,5.879a3,3,0,0,1,0,4.242L17.244,20a2,2,0,0,1-3.414-1.414V17H8a6.006,6.006,0,0,0-6,6,1,1,0,0,1-2,0ZM15.83,8a1,1,0,0,1-1,1H9a7.008,7.008,0,0,0-7,7v1.714A7.984,7.984,0,0,1,8,15h6.83a1,1,0,0,1,1,1v2.586l5.879-5.879a1,1,0,0,0,0-1.414L15.83,5.414Z"></path></svg></button><select id="select-number" class="select_02coxcfxh1g7zj4uma0"><option>0/0</option></select><hr class="hr_ZMZWNsx"><button id="button-capas" class="label_tYO6nSf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-layers"><path d="M22.485,10.975,12,17.267,1.515,10.975A1,1,0,1,0,.486,12.69l11,6.6a1,1,0,0,0,1.03,0l11-6.6a1,1,0,1,0-1.029-1.715Z"></path><path d="M22.485,15.543,12,21.834,1.515,15.543A1,1,0,1,0,.486,17.258l11,6.6a1,1,0,0,0,1.03,0l11-6.6a1,1,0,1,0-1.029-1.715Z"></path><path d="M12,14.773a2.976,2.976,0,0,1-1.531-.425L.485,8.357a1,1,0,0,1,0-1.714L10.469.652a2.973,2.973,0,0,1,3.062,0l9.984,5.991a1,1,0,0,1,0,1.714l-9.984,5.991A2.976,2.976,0,0,1,12,14.773ZM2.944,7.5,11.5,12.633a.974.974,0,0,0,1,0L21.056,7.5,12.5,2.367a.974.974,0,0,0-1,0h0Z"></path></svg></button></div></div></div></div><div id="div-window-capas" class="div_iu0mg3dwkwmbyoj7291" popover=""><div class="div_U6lIo74rWt4J6POwaZVg" style="pointer-events: none;"><div class="div_8oil7437wu5pwrsop25" style="pointer-events: initial;"><div class="div_glbsedpokowmimbmbd6j"><button data-hide-window=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-angle-small-left"><path d="M10.6,12.71a1,1,0,0,1,0-1.42l4.59-4.58a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0L9.19,9.88a3,3,0,0,0,0,4.24l4.59,4.59a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42Z"></path></svg></button><h3>Capas</h3><div id="div-button-capas" style="margin-left:auto; display:flex; gap:10px; display:none"><button id="button-download" class="label_tYO6nSf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-download"><path d="M9.878,18.122a3,3,0,0,0,4.244,0l3.211-3.211A1,1,0,0,0,15.919,13.5l-2.926,2.927L13,1a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1l-.009,15.408L8.081,13.5a1,1,0,0,0-1.414,1.415Z"></path><path d="M23,16h0a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V17a1,1,0,0,0-1-1H1a1,1,0,0,0-1,1v4a3,3,0,0,0,3,3H21a3,3,0,0,0,3-3V17A1,1,0,0,0,23,16Z"></path></svg></button><button id="clearButton" class="label_tYO6nSf"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-trash"><path d="M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z"></path><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z"></path><path d="M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"></path></svg></button></div></div><div id="div-list-capas" class="div_cou1gd2qeaa0xl1s90"></div></div></div></div></div>
+      `,
       {
         background: useParams?.style?.background,
         inputValue: useParams?.style?.color ?? "#ffffff",
@@ -58,15 +59,20 @@ function elementComponentDraw(useParams) {
   };
 
   usethis.functions.copyCanvas = (canvasOriginal) => {
+    // Crear un nuevo canvas
     const canvasCopia = document.createElement("canvas");
 
+    // Configurar el tamaño del canvas copia para que coincida con el original
     canvasCopia.width = canvasOriginal.width;
     canvasCopia.height = canvasOriginal.height;
 
+    // Obtener el contexto del canvas copia
     const ctxCopia = canvasCopia.getContext("2d");
 
+    // Dibujar el contenido del canvas original en el canvas copia
     ctxCopia.drawImage(canvasOriginal, 0, 0);
 
+    // Retornar el canvas copia
     return canvasCopia;
   };
 
@@ -103,7 +109,7 @@ function elementComponentDraw(useParams) {
     usethis.values.painting = true;
     usethis.functions.draw(e);
     if (e.type.startsWith("touch")) {
-      e.preventDefault();
+      e.preventDefault(); // Prevenir comportamiento predeterminado en touchstart
     }
   };
 
@@ -139,7 +145,7 @@ function elementComponentDraw(useParams) {
       $elements["select-number"].innerHTML = usethis.values.canvas.array
         .map((_, index, array) => {
           const option0 =
-            index == 0 ? `<option value="-">0/${array.length}</option> ` : "";
+            index == 0 ? `<option value="-">0/${array.length}</option>` : "";
           return `
             ${option0}
             <option value="${index}">${index + 1}/${array.length}</option>
@@ -164,7 +170,7 @@ function elementComponentDraw(useParams) {
       ctx.beginPath();
 
       if (e.type.startsWith("touch")) {
-        e.preventDefault();
+        e.preventDefault(); // Prevenir comportamiento predeterminado en touchend y touchcancel
       }
     }
   };
@@ -184,7 +190,7 @@ function elementComponentDraw(useParams) {
 
       x = touch.clientX - $elements.canvas.offsetLeft - rect.left;
       y = touch.clientY - $elements.canvas.offsetTop - rect.top;
-      e.preventDefault();
+      e.preventDefault(); // Prevenir comportamiento predeterminado en touchmove
     } else {
       x = e.offsetX;
       y = e.offsetY;
@@ -291,9 +297,9 @@ function elementComponentDraw(useParams) {
 
   usethis.functions.clearCanvas = () => {
     if (confirm("¿Borrar todo?")) {
-      ctx.clearRect(0, 0, $elements.canvas.width, $elements.canvas.height);
+      ctx.clearRect(0, 0, $elements.canvas.width, $elements.canvas.height); // Limpia el canvas
       usethis.values.canvas.array = [];
-      paths = [];
+      paths = []; // Limpia el historial de trazos
       usethis.values.canvas.focus = null;
 
       $elements["select-number"].innerHTML = "<option>0/0</option>";
@@ -406,9 +412,10 @@ function elementComponentDraw(useParams) {
 
     $elements["div-list-capas"].append(
       ...array.map((canvas, index) => {
-        const $element = createNodeElement(
-          `<div class="div_416usus802fqarxzzxp2" data-capa-index="${index}"><div class="img_p8g7bed9c3iqtbqsd4ig"><canvas></canvas></div><div class="div_uk3zuf6p0b3w7d34rprc"><button data-action="up"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-angle-small-up"><path d="M18,15.5a1,1,0,0,1-.71-.29l-4.58-4.59a1,1,0,0,0-1.42,0L6.71,15.21a1,1,0,0,1-1.42-1.42L9.88,9.21a3.06,3.06,0,0,1,4.24,0l4.59,4.58a1,1,0,0,1,0,1.42A1,1,0,0,1,18,15.5Z"></path></svg></button><button data-action="down"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-angle-small-down"><path d="M18.71,8.21a1,1,0,0,0-1.42,0l-4.58,4.58a1,1,0,0,1-1.42,0L6.71,8.21a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.59,4.59a3,3,0,0,0,4.24,0l4.59-4.59A1,1,0,0,0,18.71,8.21Z"></path></svg></button><button data-action="delete"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-trash"><path d="M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z"></path><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z"></path><path d="M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"></path></svg></button></div></div>`
-        );
+        const $element = createNodeElement(`
+          <div class="div_416usus802fqarxzzxp2" data-capa-index="${index}"><div class="img_p8g7bed9c3iqtbqsd4ig"><canvas></canvas></div><div class="div_uk3zuf6p0b3w7d34rprc"><button data-action="up"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-angle-small-up"><path d="M18,15.5a1,1,0,0,1-.71-.29l-4.58-4.59a1,1,0,0,0-1.42,0L6.71,15.21a1,1,0,0,1-1.42-1.42L9.88,9.21a3.06,3.06,0,0,1,4.24,0l4.59,4.58a1,1,0,0,1,0,1.42A1,1,0,0,1,18,15.5Z"></path></svg></button><button data-action="down"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-angle-small-down"><path d="M18.71,8.21a1,1,0,0,0-1.42,0l-4.58,4.58a1,1,0,0,1-1.42,0L6.71,8.21a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.59,4.59a3,3,0,0,0,4.24,0l4.59-4.59A1,1,0,0,0,18.71,8.21Z"></path></svg></button><button data-action="delete"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-svg-name="fi fi-rr-trash"><path d="M21,4H17.9A5.009,5.009,0,0,0,13,0H11A5.009,5.009,0,0,0,6.1,4H3A1,1,0,0,0,3,6H4V19a5.006,5.006,0,0,0,5,5h6a5.006,5.006,0,0,0,5-5V6h1a1,1,0,0,0,0-2ZM11,2h2a3.006,3.006,0,0,1,2.829,2H8.171A3.006,3.006,0,0,1,11,2Zm7,17a3,3,0,0,1-3,3H9a3,3,0,0,1-3-3V6H18Z"></path><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18Z"></path><path d="M14,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z"></path></svg></button></div></div>
+        `);
+
         $element.querySelector("canvas").replaceWith(canvas);
         return $element;
       })
@@ -488,7 +495,7 @@ function elementComponentDraw(useParams) {
       $elements["select-number"].innerHTML = usethis.values.canvas.array
         .map((_, index, array) => {
           const option0 =
-            index == 0 ? `<option value="-">0/${array.length}</option> ` : "";
+            index == 0 ? `<option value="-">0/${array.length}</option>` : "";
           return `
             ${option0} 
             <option value="${index}">${index + 1}/${array.length}</option>
@@ -513,14 +520,20 @@ function elementComponentDraw(useParams) {
     }
   });
   $elements["button-download"].addEventListener("click", () => {
-    const dataURL = $elements["img-canvas"].toDataURL("image/png");
+    const dataURL = $elements["img-canvas"].toDataURL("image/png"); // Exportar el canvas como PNG
     const enlace = document.createElement("a");
     enlace.href = dataURL;
-    enlace.download = `canvas-${Date.now()}.png`;
+    enlace.download = `canvas-${Date.now()}.png`; // Nombre del archivo
     enlace.click();
   });
 
+  const style = document.createElement("style");
+  style.innerHTML =
+    ".div_j46nnVSnu8tuV8 { user-select: none; font-family: sans-serif; position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: #000; margin: 0; padding: 0; box-sizing: border-box; * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; } svg { width: 15px; height: 15px; } .div_Aqa0wxW { position: absolute; width: 100%; height: 100%; gap: 30px; display: flex; align-items: center; justify-content: center; pointer-events: none; } .label_tYO6nSf { width: 40px; height: 40px; position: relative; display: flex; justify-content: center; align-items: center; border: none; outline: none; background: none; & input { position: absolute; visibility: hidden;} & svg { width: 15px; height: 15px; fill: #fff; } } .div_ak1IaKv { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; } .div_HPp5z9l { flex: 1; position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; & canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; } & img { width: 100%; height: 100%; } } .select_Z1abqn2 { all: unset; color: #fff; font-weight: bold; height: 40px; display: flex; justify-content: center; align-items: center; text-align: center; padding: 0 10px; & option { background: #000; } } .hr_ZMZWNsx { background: rgb(181 178 178 / 0.5); border: none; width: 1px; height: 50%; } .div_KNf6yZy { display: flex; justify-content: center; align-items: center; background: #313131; border-radius: 40px; } .select_02coxcfxh1g7zj4uma0 { all: unset; flex: 1; padding: 0 10px; text-align: left; color: #fff; & option { background: #000; } } .div_rmjk5xfg86dvogr3jvwy { position: absolute; left: 0; top: 0; width: 100%; height: 60px; padding: 10px; gap: 10px; display: flex; justify-content: space-between; overflow-y: hidden; overflow-x: auto; scrollbar-width: none; &.toggle { top: initial; bottom: 0; } } .div_ykgovoznvjn8f9uocd2q { display: flex; } .div_en26u61vg0k3ebqqc9f1 { position: relative; pointer-events: initial; backdrop-filter: blur(150px); border-radius: 40px; background: #313131; } .div_iu0mg3dwkwmbyoj7291 { width: 100%; height: 100%; border: none; background: none; } .div_U6lIo74rWt4J6POwaZVg { width: 100%; height: 100%; display: flex; padding: 20px; backdrop-filter: blur(7px); } .div_8oil7437wu5pwrsop25 { margin: auto; display: flex; flex-direction: column; width: min(100%, 450px); max-height: 100%; border-radius: 15px; overflow: hidden; background: #000; color: #fff; outline: 1px solid #fff; cursor: initial; } .div_cou1gd2qeaa0xl1s90 { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #fff transparent; } .div_416usus802fqarxzzxp2 { display: flex; align-items: center; justify-content: space-between; padding: 10px; gap: 10px; } .img_p8g7bed9c3iqtbqsd4ig { height: 100px; aspect-ratio: 16/9;outline: 1px solid #fff; & img { width: 100%; height: 100%; object-fit: contain; } & canvas { width: 100%; height: 100%; object-fit: contain; } } .div_uk3zuf6p0b3w7d34rprc { display: flex; gap: 10px; & button { all: unset; background: #313131; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; box-sizing: border-box; border-radius: 15px; } & svg { fill: #fff; } } .div_glbsedpokowmimbmbd6j { height: 60px; width: 100%; padding: 10px; gap: 10px; display: flex; align-items: center; & button { all: unset; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 15px; background: #313131; } & svg { fill: #fff; } } .label_rd4e5h0gakv26fgdsngm { background: #fff; border-radius: 50%; & svg { mix-blend-mode: difference; } } }";
+
   setTimeout(usethis.functions.resizeCanvas);
   addEventListener("resize", usethis.functions.resizeCanvas);
+
+  $element.prepend(style);
   return $element;
 }
