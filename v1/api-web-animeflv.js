@@ -145,7 +145,7 @@ class ApiWebAnimeflv {
                   ).map((child, index) => {
                     if (index == 0) {
                       return `https://m.animeflv.net${child.getAttribute(
-                        "src"
+                        "data-img-src"
                       )}`;
                     }
                     return child.innerText;
