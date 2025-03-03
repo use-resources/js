@@ -928,6 +928,19 @@ class MediaPlayer {
     return (name = "") => icons[name] || "";
   }
 
+  info(data = "") {
+    this._elements.videoTitle.textContent = data?.title || "";
+    this._elements.videoDescription.textContent = data?.description || "";
+  }
+
+  controls(data) {
+    return data;
+  }
+
+  element = (query = "") => {
+    return query != "" ? this._element.querySelector(query) : this._element;
+  };
+
   video(callback) {
     callback?.(this._element.querySelector("video"));
   }
