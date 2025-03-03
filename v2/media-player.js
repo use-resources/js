@@ -222,6 +222,10 @@ class MediaPlayer {
       });
 
       $video.addEventListener("error", (e) => {
+        if ($elements.video.getAttribute("src") == "") {
+          return;
+        }
+        
         if (e.target.error.code == 4) {
           $elements.spanLoad.style.display = "none";
           $elements.spanError.style.display = "";
