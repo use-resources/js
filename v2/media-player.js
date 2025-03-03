@@ -154,10 +154,12 @@ class MediaPlayer {
 
       $video.addEventListener("loadedmetadata", () => {
         $elements.spanLoad.style.display = "none";
+        $elements.spanError.style.display = "none";
+
         $canvas.width = $video.videoWidth;
         $canvas.height = $video.videoHeight;
 
-        // $video.play().catch(() => {});
+        $video.play().catch(() => {});
       });
       $video.addEventListener("play", () => {
         $elements.buttonPlay.innerHTML = useThis.svgIcon("fi fi-sr-pause");
