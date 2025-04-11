@@ -15,17 +15,9 @@ window.myResourceFunction = (function (_) {
 
     return element;
   };
-  _.createFragment = function (html, callback) {
-    const template = document.createElement("div");
+  _.createFragment = function (...childNodes) {
     const fragment = document.createDocumentFragment();
-
-    template.innerHTML = html;
-    fragment.append(...template.childNodes);
-
-    if (typeof callback == "function") {
-      callback(fragment);
-    }
-
+    fragment.append(...childNodes);
     return fragment;
   };
   _.objectElement = function (elements, attribute, remove = false) {
@@ -237,7 +229,7 @@ window.myResourceFunction = (function (_) {
       return prev;
     }, {});
   };
-  _.percentage = function percentage(current, total) {
+  _.percentage = function (current, total) {
     return (parseFloat(current) / parseFloat(total)) * 100;
   };
   _.encodeToParams = function (query) {
@@ -306,6 +298,14 @@ window.myResourceFunction = (function (_) {
       if (timeout) clearTimeout(timeout);
       timeout = setTimeout(callback, time, ...parameters);
     };
+  };
+  _.formData = function (object) {
+    const formData = new FormData();
+    Object.entries(object).forEach(function ([key, value]) {
+      const array = Array.isArray(value) ? value : [value];
+      formData.append(key, ...array);
+    });
+    return formData;
   };
   return _;
 })({});
