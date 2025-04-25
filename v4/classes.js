@@ -282,7 +282,7 @@ window.myResourceClass = (function (_) {
       });
     }
   };
-  _.Trigger = class {
+  _.Signal = class {
     constructor() {
       this._map = new Map();
     }
