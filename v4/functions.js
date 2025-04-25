@@ -43,19 +43,30 @@ window.myResourceFunction = (function (_) {
   };
   _.replaceChildren = function (element, children = {}) {
     if (element instanceof Node) {
-      Object.entries(children ?? {}).forEach(([key, value]) => {
-        const query = element.querySelector(key);
-        if (query) {
-          query.replaceWith(value);
-          if (value instanceof Element) {
-            value.append(...query.childNodes);
+      const mapped = Object.entries(children).map(([key, value]) => {
+        const query = key
+          .replace(/[A-Z]/g, (letra) => `-${letra}`)
+          .toLowerCase();
 
-            Array.from(query.attributes).forEach((attribute) => {
-              value.setAttribute?.(
+        return {
+          replaceNode: value,
+          currentNode: element.querySelector(query),
+        };
+      });
+
+      mapped.forEach(({ replaceNode, currentNode }) => {
+        if (currentNode instanceof Node) {
+          currentNode.replaceWith(replaceNode);
+          if (replaceNode instanceof Element) {
+            replaceNode.append(...currentNode.childNodes);
+
+            Array.from(currentNode.attributes).forEach((attribute) => {
+              const attributeValue =
+                replaceNode.getAttribute(attribute.name) || "";
+
+              replaceNode.setAttribute(
                 attribute.name,
-                `${value.getAttribute(attribute.name) || ""} ${
-                  attribute.value
-                }`.trim()
+                `${attributeValue} ${attribute.value}`.trim()
               );
             });
           }
