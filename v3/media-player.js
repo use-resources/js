@@ -1318,8 +1318,6 @@ class MediaPlayer {
           : "fi fi-rr-arrow-up-right-and-arrow-down-left-from-center"
       );
 
-      console.log($elements.buttonFullscreen);
-
       if (document.fullscreenElement) {
         // $elements.buttonRotate.style.display = "";
 
@@ -1379,16 +1377,10 @@ class MediaPlayer {
 
     this.__icons = icons;
 
-    console.log(icons);
-
     return (name = "") => icons[name] || "";
   }
 
   svgIcon(name = "") {
-    console.log(name);
-    console.log(this.__icons);
-    console.log(this.__icons[name]);
-    console.log("--------------------------");
     return this.__icons[name] || "";
   }
 
